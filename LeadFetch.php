@@ -1,0 +1,336 @@
+<?php
+ 
+	require_once 'inc/session.php';
+	
+	if(!isset($_SESSION['userID'],$_SESSION['user_role_id']))
+	{
+		header('location:login.php?lmsg=true');
+		exit;
+	}		
+    //identyfied
+	 if($_SESSION['user_role_id'] != 0 && $_SESSION['user_role_id'] != 2 ){
+		
+          header("Location:index.php");  
+		 }
+
+ ?>
+ 
+<?php include_once("layouts/header.php");?>
+
+ 
+
+
+
+    <table id="fresh-table" class="table">
+      <thead>
+<!--        <th data-field="id">ID</th>-->
+        <th data-field="name" data-sortable="true">Name</th> 
+        <th data-field="email" data-sortable="true">Email</th> 
+        <th data-field="phone" data-sortable="true">Phone No</th>
+        <th data-field="destinations" data-sortable="true">Destinations</th>
+        <th data-field="person" data-sortable="true">Person</th>
+        <th data-field="date" data-sortable="true">Lead Date</th>  
+        <th data-field="activity" data-sortable="true">Last Activity Date</th>
+        <th data-field="response" data-sortable="true">Response</th> 
+                    
+<!--        <th data-field="actions" data-formatter="operateFormatter" data-events="operateEvents">Actions</th>-->
+      </thead> 
+         <tbody>               
+  <?php
+  if (isset($_GET['page_no']) && $_GET['page_no']!="") {
+	$page_no = $_GET['page_no'];
+	} else {
+		$page_no = 1;
+        }
+
+	$total_records_per_page = 500;
+    $offset = ($page_no-1) * $total_records_per_page;
+	$previous_page = $page_no - 1;
+	$next_page = $page_no + 1;
+	$adjacents = "2"; 
+    $user_name = $_SESSION['user_name']; 
+//    filter
+    $responsefilter = $_POST['responsefilter'];   
+    if($_POST['responsefilter']== 'All'){         
+	$result_count = mysqli_query($conn,"SELECT COUNT(*) As total_records FROM `itinerary` WHERE sales_person ='$user_name'");
+     }
+else if($_POST['responsefilter']== 'Empty'){         
+	$result_count = mysqli_query($conn,"SELECT COUNT(*) As total_records FROM `itinerary` WHERE sales_person ='$user_name' and response_client =''");
+     }        
+   else{         
+	$result_count = mysqli_query($conn,"SELECT COUNT(*) As total_records FROM `itinerary` WHERE sales_person ='$user_name' and response_client ='$responsefilter'");
+     }        
+             
+	$total_records = mysqli_fetch_array($result_count);
+	$total_records = $total_records['total_records'];
+    $total_no_of_pages = ceil($total_records / $total_records_per_page);
+	$second_last = $total_no_of_pages - 1; // total page minus 1        
+                       
+ 
+             
+//  filter
+   $userID = $_SESSION['userID'];            
+   $sql = "SELECT * FROM filter WHERE filterID = $userID";
+   $sth = $db->query($sql);
+   $result=mysqli_fetch_array($sth); 
+   $responsefilter =$result['LeadFilter'];     
+      
+                            
+             
+             
+             
+             
+             
+             
+             
+$user_name = $_SESSION['user_name'];   
+$filter = $responsefilter;             
+if($_POST['responsefilter'] == 'All'){        
+ $query_r = mysqli_query($db,"SELECT * FROM itinerary WHERE sales_person ='$user_name'  ORDER BY id DESC ") 
+or die(mysqli_error()); 
+ //  for row number
+  $Numrow = mysqli_num_rows($query_r);   
+}
+else if($_POST['responsefilter'] == 'Empty'){        
+ $query_r = mysqli_query($db,"SELECT * FROM itinerary WHERE sales_person ='$user_name' and response_client =''  ORDER BY id DESC ") 
+or die(mysqli_error()); 
+ //  for row number
+  $Numrow = mysqli_num_rows($query_r);   
+}             
+else{
+ $responsefilter = $_POST['responsefilter']; 
+ $query_r = mysqli_query($db,"SELECT * FROM itinerary WHERE sales_person ='$user_name' and response_client ='$responsefilter'  ORDER BY id DESC ") 
+or die(mysqli_error()); 
+ //  for row number
+  $Numrow = mysqli_num_rows($query_r);  
+}             
+while($row = mysqli_fetch_array( $query_r ))
+{
+?>  
+<tr>
+                    <td>
+    <a href="Itinerary-view.php?view_itinerary=<?php echo $row['id']; ?>"  class="user"><?php echo $row['name'];?></a> 
+                    </td> 
+                    <td><?php echo $row['email'];?></td>
+                    <td><?php echo $row['mo_number'];?></td>
+                    <td><?php echo $row['destination'];?></td>
+                    <td><?php echo $row['no_person'];?></td>
+                     <td>
+                      <?php
+                       $time = $row['date']; 
+                       echo  date('d M Y, g;i A', strtotime($time));
+                         ?>
+                      </td> 
+                       <td>
+                      <?php
+                       $time = $row['lastActivity']; 
+                       echo  date('d M Y, g;i A', strtotime($time));
+                         ?>
+                      </td> 
+                       <td>
+                       <?php  
+                       echo  $row['response_client'];  ?>
+                      </td> 
+     
+    
+ 
+ </tr>                    
+ <?php
+}        
+?>                  
+</tbody>
+ </table>
+<div class="fixed-table-pagination"> 
+  
+<ul class="pagination">
+    <li class="nav-item">
+     <div style='padding: 10px 20px 0px; border-top: dotted 1px #CCC;'>
+<strong>
+Page <?php echo $page_no." of ".$total_no_of_pages; ?>
+
+    
+    <?php  
+ $query_r = mysqli_query($db,"SELECT * FROM potential WHERE sales_person ='$user_name'  ORDER BY id DESC") 
+or die(mysqli_error());
+$Totalrow = mysqli_num_rows($query_r); 
+echo "<span class='btn btn-info'> Total   $Totalrow </span>";      
+    ?> 
+ </strong>
+</div> 
+    </li>
+    
+	<?php // if($page_no > 1){ echo "<li><a href='?page_no=1'>First Page</a></li>"; } ?>
+    
+	<li class="nav-item" <?php if($page_no <= 1){ echo "class='disabled'"; } ?>>
+	<a class="nave-pagination" <?php if($page_no > 1){ echo "href='?page_no=$previous_page'"; } ?>>Previous</a>
+	</li>
+       
+    <?php 
+	if ($total_no_of_pages <= 10){  	 
+		for ($counter = 1; $counter <= $total_no_of_pages; $counter++){
+			if ($counter == $page_no) {
+		   echo "<li class='nav-item active'><a class='nave-pagination'>$counter</a></li>";	
+				}else{
+           echo "<li class='nav-item'><a class='nave-pagination' href='?page_no=$counter'>$counter</a></li>";
+				}
+        }
+	}
+	elseif($total_no_of_pages > 10){
+		
+	if($page_no <= 4) {			
+	 for ($counter = 1; $counter < 8; $counter++){		 
+			if ($counter == $page_no) {
+		   echo "<li class='nav-item active'><a class='nave-pagination'>$counter</a></li>";	
+				}else{
+           echo "<li class='nav-item'><a class='nave-pagination' href='?page_no=$counter'>$counter</a></li>";
+				}
+        }
+		echo "<li class='nav-item'><a class='nave-pagination'>...</a></li>";
+		echo "<li class='nav-item'><a class='nave-pagination' href='?page_no=$second_last'>$second_last</a></li>";
+		echo "<li class='nav-item'><a class='nave-pagination' href='?page_no=$total_no_of_pages'>$total_no_of_pages</a></li>";
+		}
+
+	 elseif($page_no > 4 && $page_no < $total_no_of_pages - 4) {		 
+		echo "<li class='nav-item'><a class='nave-pagination' href='?page_no=1'>1</a></li>";
+		echo "<li class='nav-item'><a class='nave-pagination' href='?page_no=2'>2</a></li>";
+        echo "<li class='nav-item'><a class='nave-pagination'>...</a></li>";
+        for ($counter = $page_no - $adjacents; $counter <= $page_no + $adjacents; $counter++) {			
+           if ($counter == $page_no) {
+		   echo "<li class='nav-item active'><a class='nave-pagination'>$counter</a></li>";	
+				}else{
+           echo "<li class='nav-item'><a class='nave-pagination' href='?page_no=$counter'>$counter</a></li>";
+				}                  
+       }
+       echo "<li class='nav-item'><a class='nave-pagination'>...</a></li>";
+	   echo "<li class='nav-item'><a class='nave-pagination' href='?page_no=$second_last'>$second_last</a></li>";
+	   echo "<li class='nav-item'><a class='nave-pagination' href='?page_no=$total_no_of_pages'>$total_no_of_pages</a></li>";      
+            }
+		
+		else {
+        echo "<li class='nav-item'><a class='nave-pagination' href='?page_no=1'>1</a></li>";
+		echo "<li class='nav-item'><a class='nave-pagination' href='?page_no=2'>2</a></li>";
+        echo "<li class='nav-item'><a class='nave-pagination'>...</a></li>";
+
+        for ($counter = $total_no_of_pages - 6; $counter <= $total_no_of_pages; $counter++) {
+          if ($counter == $page_no) {
+		   echo "<li class='nav-item active'><a class='nave-pagination'>$counter</a></li>";	
+				}else{
+           echo "<li class='nav-item'><a class='nave-pagination' href='?page_no=$counter'>$counter</a></li>";
+				}                   
+                }
+            }
+	}
+?>
+    
+	<li class='nav-item' <?php if($page_no >= $total_no_of_pages){ echo "class='disabled'"; } ?>>
+	<a class="nave-pagination" <?php if($page_no < $total_no_of_pages) { echo "href='?page_no=$next_page'"; } ?>>Next</a>
+	</li>
+    <?php if($page_no < $total_no_of_pages){
+		echo "<li class='nav-item'><a class='nave-pagination' href='?page_no=$total_no_of_pages'>Last &rsaquo;&rsaquo;</a></li>";
+		} ?>
+</ul>
+    <span class="btn r-filter"><?php  echo " Now ". $Numrow; ?></span> 
+      </div>      
+ 
+        <!-- /.container-fluid --> 
+    
+<script>
+  var $table = $('#fresh-table')
+
+  window.operateEvents = {
+    'click .like': function (e, value, row, index) {
+      alert('You click like icon, row: ' + JSON.stringify(row))
+      console.log(value, row, index)
+    },
+    'click .edit': function (e, value, row, index) {
+      alert('You click edit icon, row: ' + JSON.stringify(row))
+      console.log(value, row, index)
+    },
+    'click .remove': function (e, value, row, index) {
+      $table.bootstrapTable('remove', {
+        field: 'id',
+        values: [row.id]
+      })
+    }
+  }
+
+  function operateFormatter(value, row, index) {
+    return [
+      '<a rel="tooltip" title="Like" class="table-action like" href="javascript:void(0)" title="Like">',
+        '<i class="fa fa-heart"></i>',
+      '</a>',
+      '<a rel="tooltip" title="Edit" class="table-action edit" href="javascript:void(0)" title="Edit">',
+        '<i class="fa fa-edit"></i>',
+      '</a>',
+      '<a rel="tooltip" title="Remove" class="table-action remove" href="javascript:void(0)" title="Remove">',
+        '<i class="fa fa-remove"></i>',
+      '</a>'
+    ].join('')
+  }
+
+    
+    
+  $(function () {
+    $table.bootstrapTable({ 
+      cache: false,  
+      search: true,
+      showRefresh: true,
+      showToggle: true,
+      showColumns: true,
+      pagination: false,
+      striped: true,
+      sortable: true,
+      height: $(window).height(),
+      pageSize: 25, 
+      toolbar: ".toolbar",
+      clickToSelect: true,    
+      pageList: [8,10,25,50,100],  
+
+      formatShowingRows: function (pageFrom, pageTo, totalRows) {
+        return ''
+      },
+      formatRecordsPerPage: function (pageNumber) {
+        return pageNumber + ' rows visible'
+      },
+       formatShowingRows: function(pageFrom, pageTo, totalRows){
+                    //do nothing here, we don't want to show the text "showing x of y from..."
+                    return 'Showing ' + pageFrom + ' to ' + pageTo + ' of ' + totalRows + ' ';
+                }  
+        
+    }) 
+      
+    $(window).resize(function () {
+      $table.bootstrapTable('resetView', {
+        height: $(window).height()
+      })
+    })
+  })
+
+ 
+ 
+</script>  
+    
+      <!-- End of Main Content -->
+ 
+   <script src="asset/js/external.js"></script>  
+  <!-- Bootstrap core JavaScript--> 
+  <script src="asset/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="asset/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="asset/js/sb-admin-2.min.js"></script>
+ 
+
+
+
+
+
+
+
+
+
+
+
+ 

@@ -1,0 +1,291 @@
+[18-Nov-2022 17:50:55 Asia/Kolkata] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 20
+[18-Nov-2022 17:50:55 Asia/Kolkata] PHP Warning:  mysqli_select_db() expects parameter 1 to be mysqli, bool given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 21
+[18-Nov-2022 17:50:55 Asia/Kolkata] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 38
+[18-Nov-2022 17:50:55 Asia/Kolkata] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 40
+[18-Nov-2022 17:50:55 Asia/Kolkata] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 51
+[18-Nov-2022 17:51:03 Asia/Kolkata] PHP Notice:  Undefined index: received_amount in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 7
+[18-Nov-2022 17:51:03 Asia/Kolkata] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 20
+[18-Nov-2022 17:51:03 Asia/Kolkata] PHP Warning:  mysqli_select_db() expects parameter 1 to be mysqli, bool given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 21
+[18-Nov-2022 17:51:03 Asia/Kolkata] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 38
+[18-Nov-2022 17:51:03 Asia/Kolkata] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 40
+[18-Nov-2022 17:51:03 Asia/Kolkata] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 51
+[22-Nov-2022 13:03:53 Asia/Kolkata] PHP Notice:  Undefined index: received_amount in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 7
+[22-Nov-2022 13:04:08 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:42
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 42
+[22-Nov-2022 13:04:16 Asia/Kolkata] PHP Notice:  Undefined index: received_amount in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 7
+[22-Nov-2022 13:04:16 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:42
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 42
+[22-Nov-2022 13:04:20 Asia/Kolkata] PHP Notice:  Undefined index: received_amount in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 7
+[22-Nov-2022 13:04:20 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:42
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 42
+[22-Nov-2022 13:14:41 Asia/Kolkata] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 20
+[22-Nov-2022 13:14:41 Asia/Kolkata] PHP Warning:  mysqli_select_db() expects parameter 1 to be mysqli, bool given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 21
+[22-Nov-2022 13:14:41 Asia/Kolkata] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 40
+[22-Nov-2022 13:14:41 Asia/Kolkata] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 42
+[22-Nov-2022 13:14:41 Asia/Kolkata] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 53
+[22-Nov-2022 13:14:45 Asia/Kolkata] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 20
+[22-Nov-2022 13:14:45 Asia/Kolkata] PHP Warning:  mysqli_select_db() expects parameter 1 to be mysqli, bool given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 21
+[22-Nov-2022 13:14:45 Asia/Kolkata] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 40
+[22-Nov-2022 13:14:45 Asia/Kolkata] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 42
+[22-Nov-2022 13:14:45 Asia/Kolkata] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 53
+[22-Nov-2022 13:16:14 Asia/Kolkata] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 20
+[22-Nov-2022 13:16:14 Asia/Kolkata] PHP Warning:  mysqli_select_db() expects parameter 1 to be mysqli, bool given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 21
+[22-Nov-2022 13:16:14 Asia/Kolkata] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 41
+[22-Nov-2022 13:16:14 Asia/Kolkata] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 43
+[22-Nov-2022 13:16:14 Asia/Kolkata] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 54
+[22-Nov-2022 13:16:16 Asia/Kolkata] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 20
+[22-Nov-2022 13:16:16 Asia/Kolkata] PHP Warning:  mysqli_select_db() expects parameter 1 to be mysqli, bool given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 21
+[22-Nov-2022 13:16:16 Asia/Kolkata] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 41
+[22-Nov-2022 13:16:16 Asia/Kolkata] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 43
+[22-Nov-2022 13:16:16 Asia/Kolkata] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 54
+[22-Nov-2022 13:16:16 Asia/Kolkata] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 20
+[22-Nov-2022 13:16:16 Asia/Kolkata] PHP Warning:  mysqli_select_db() expects parameter 1 to be mysqli, bool given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 21
+[22-Nov-2022 13:16:16 Asia/Kolkata] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 41
+[22-Nov-2022 13:16:16 Asia/Kolkata] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 43
+[22-Nov-2022 13:16:16 Asia/Kolkata] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 54
+[22-Nov-2022 13:16:29 Asia/Kolkata] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 20
+[22-Nov-2022 13:16:29 Asia/Kolkata] PHP Warning:  mysqli_select_db() expects parameter 1 to be mysqli, bool given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 21
+[22-Nov-2022 13:16:29 Asia/Kolkata] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 40
+[22-Nov-2022 13:16:29 Asia/Kolkata] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 42
+[22-Nov-2022 13:16:29 Asia/Kolkata] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 53
+[22-Nov-2022 13:16:34 Asia/Kolkata] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 20
+[22-Nov-2022 13:16:34 Asia/Kolkata] PHP Warning:  mysqli_select_db() expects parameter 1 to be mysqli, bool given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 21
+[22-Nov-2022 13:16:34 Asia/Kolkata] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 40
+[22-Nov-2022 13:16:34 Asia/Kolkata] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 42
+[22-Nov-2022 13:16:34 Asia/Kolkata] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 53
+[22-Nov-2022 13:17:36 Asia/Kolkata] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 20
+[22-Nov-2022 13:17:36 Asia/Kolkata] PHP Warning:  mysqli_select_db() expects parameter 1 to be mysqli, bool given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 21
+[22-Nov-2022 13:17:36 Asia/Kolkata] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 40
+[22-Nov-2022 13:17:36 Asia/Kolkata] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 42
+[22-Nov-2022 13:17:36 Asia/Kolkata] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 53
+[22-Nov-2022 13:18:38 Asia/Kolkata] PHP Warning:  mysqli_connect(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 20
+[22-Nov-2022 13:18:38 Asia/Kolkata] PHP Warning:  mysqli_select_db() expects parameter 1 to be mysqli, bool given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 21
+[22-Nov-2022 13:18:38 Asia/Kolkata] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 40
+[22-Nov-2022 13:18:38 Asia/Kolkata] PHP Warning:  mysqli_num_rows() expects parameter 1 to be mysqli_result, null given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 42
+[22-Nov-2022 13:18:38 Asia/Kolkata] PHP Warning:  mysqli_query() expects parameter 1 to be mysqli, bool given in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 53
+[22-Nov-2022 14:34:51 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:44
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 44
+[22-Nov-2022 14:34:55 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:44
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 44
+[22-Nov-2022 14:36:12 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:44
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 44
+[22-Nov-2022 14:36:22 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:44
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 44
+[22-Nov-2022 14:38:50 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:44
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 44
+[22-Nov-2022 14:38:54 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:44
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 44
+[22-Nov-2022 14:39:21 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:44
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 44
+[22-Nov-2022 14:39:44 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:44
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 44
+[22-Nov-2022 14:40:43 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:44
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 44
+[22-Nov-2022 14:40:45 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:44
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 44
+[22-Nov-2022 14:41:12 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:44
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 44
+[22-Nov-2022 14:41:13 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:44
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 44
+[22-Nov-2022 14:44:51 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:44
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 44
+[22-Nov-2022 14:45:02 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:44
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 44
+[22-Nov-2022 14:45:24 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:44
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 44
+[22-Nov-2022 14:46:25 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:44
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 44
+[22-Nov-2022 14:46:56 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:44
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 44
+[22-Nov-2022 14:47:48 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:44
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 44
+[22-Nov-2022 14:48:24 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:44
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 44
+[22-Nov-2022 14:49:06 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:44
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 44
+[22-Nov-2022 14:50:14 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:44
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 44
+[22-Nov-2022 14:51:14 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:44
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 44
+[22-Nov-2022 14:52:28 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:44
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 44
+[22-Nov-2022 14:55:54 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:44
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 44
+[22-Nov-2022 14:56:50 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:44
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 44
+[22-Nov-2022 14:58:46 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:44
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 44
+[22-Nov-2022 14:59:44 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:44
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 44
+[22-Nov-2022 15:00:09 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:44
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 44
+[22-Nov-2022 15:01:30 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:44
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 44
+[22-Nov-2022 15:01:31 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:44
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 44
+[22-Nov-2022 15:01:33 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:44
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 44
+[22-Nov-2022 15:04:18 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:44
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 44
+[22-Nov-2022 15:05:27 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:44
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 44
+[22-Nov-2022 15:05:51 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:44
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 44
+[22-Nov-2022 15:08:40 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:44
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 44
+[22-Nov-2022 15:09:33 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:44
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 44
+[22-Nov-2022 15:11:59 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:44
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 44
+[22-Nov-2022 15:12:02 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:44
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 44
+[22-Nov-2022 15:29:49 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:43
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 43
+[22-Nov-2022 15:31:46 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:43
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 43
+[22-Nov-2022 15:31:49 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:43
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 43
+[22-Nov-2022 15:31:59 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:43
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 43
+[22-Nov-2022 15:33:54 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:43
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 43
+[22-Nov-2022 15:33:57 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:43
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 43
+[22-Nov-2022 15:34:05 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:43
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 43
+[22-Nov-2022 15:38:02 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:43
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 43
+[22-Nov-2022 15:38:55 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:43
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 43
+[22-Nov-2022 15:39:56 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 58
+[22-Nov-2022 15:39:59 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 58
+[22-Nov-2022 15:40:31 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 58
+[22-Nov-2022 15:41:09 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 58
+[22-Nov-2022 15:41:12 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 58
+[22-Nov-2022 15:41:21 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 58
+[22-Nov-2022 15:41:49 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 58
+[22-Nov-2022 15:41:55 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 58
+[22-Nov-2022 15:42:04 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 58
+[22-Nov-2022 15:43:12 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 58
+[22-Nov-2022 15:43:17 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 58
+[22-Nov-2022 15:43:21 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 58
+[22-Nov-2022 15:43:47 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 58
+[22-Nov-2022 15:43:51 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 58
+[22-Nov-2022 15:44:14 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 58
+[22-Nov-2022 15:44:17 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 58
+[22-Nov-2022 15:45:15 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 58
+[22-Nov-2022 15:45:19 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 58
+[22-Nov-2022 15:46:17 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 58
+[22-Nov-2022 15:46:21 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 58
+[22-Nov-2022 15:46:36 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 58
+[22-Nov-2022 15:50:16 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 58
+[22-Nov-2022 15:50:30 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 58
+[22-Nov-2022 15:50:49 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 58
+[22-Nov-2022 15:53:24 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 58
+[22-Nov-2022 15:54:06 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 58
+[22-Nov-2022 15:54:19 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 58
+[22-Nov-2022 15:55:41 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 58
+[22-Nov-2022 16:00:00 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Cannot use object of type mysqli_result as array in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php:43
+Stack trace:
+#0 {main}
+  thrown in /home/bgrds0lzdyhl/public_html/templemitracrm.in/inc/potential/AddInAcount.php on line 43

@@ -1,0 +1,59 @@
+
+/*new table*/
+#user_data_wrapper .row:first-child { 
+    background: url(../../images/img/bck_pattern.jpg); 
+    color: #FFFFFF;
+    background-size: 12px;
+    padding: 0px 43px; 
+    border-color: rgba(255, 255, 255, 0.15);
+    color: #FFFFFF;
+}
+#user_data_wrapper .row:nth-child(3n+0) { 
+    background: url(../../images/img/bck_pattern.jpg); 
+    color: #FFFFFF;
+    background-size: 12px;
+/*    background: radial-gradient(ellipse at center, #F7399F 0%, #3800bf 100%);*/
+    padding: 10px 0px 0px 6px; 
+    border-color: rgba(255, 255, 255, 0.15);
+    color: #FFFFFF;
+}
+ 
+#alert_message{
+    position: absolute;
+    height: 31px; 
+    left: 15%;
+    font-size: 14px;
+}
+
+.leadInput{ 
+    border: 1px solid #007a8e;
+    height: 40px;
+    margin-top: 8px;
+    padding: 1px 8px;
+    width: 100%;
+    box-shadow: 0px 0px 8px 0px #0d447b;
+}
+.insertLead textarea{
+    height: 70px !important;
+}
+.insertLead{
+    background-color: #1c64ae;
+    padding: 12px;
+    box-shadow: 0px 20px 21px 1px #000000;
+    top: 25%;
+    z-index: 99;
+}
+.insertLead-head{
+    background-color: #1c64ae; 
+    box-shadow: 0px 4px 7px 1px #000000;
+}
+
+
+.insert-btn{
+    margin: 20px auto;
+    
+}
+
+.lead-row{
+    background: #ffffff00!important;
+} 
