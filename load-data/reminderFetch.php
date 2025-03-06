@@ -20,22 +20,21 @@
     }
 
 
-    $dataid = $_SESSION['potential_id'];
+    // $dataid = $_SESSION['potential_id'];
     $dataid = $_SESSION['clid'];
-    
+
 
     // user veryfied and get sales name 
     $getU = mysqli_query($conn, "SELECT sales_person from lead where id ='$dataid' ");
     $u_nameI = mysqli_fetch_array($getU);
-    if(!empty($u_nameI['sales_person'])){
-    $user = $u_nameI['sales_person'];
-     }
-     else{
+    if (!empty($u_nameI['sales_person'])) {
+      $user = $u_nameI['sales_person'];
+    } else {
       $getP = mysqli_query($conn, "SELECT sales_person from potential where id ='$dataid' ");
       $u_nameP = mysqli_fetch_array($getP);
       $user = $u_nameP['sales_person'];
-     }
-   //end user veryfied and get sales name 
+    }
+    //end user veryfied and get sales name 
 
 
 

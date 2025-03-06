@@ -148,9 +148,129 @@ echo json_encode($output);
 
 ?>
 
+<!-- for reminder old -->
+
+<li class="nav-item dropdown no-arrow mx-1">
+	<a class="nav-link dropdown-toggle" href="#" id="reminderDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		<i class="fas fa-stopwatch fa-fw notifi-text"></i>
+
+		<!-- Counter - remerk -->
+		<span id="notificationReminderCount" class="badge badge-danger badge-counter">
+			<!-- Counter number - reminder -->
+			<?php
+			// r count alert
+			date_default_timezone_set('Asia/Kolkata');
+			$timestamp = date('Y-m-d H:i:s');
+			$res = mysqli_query($db, "SELECT * FROM reminder WHERE remark= '' and sales_person = '" . $_SESSION['user_name'] . "' and reminder_date <= '$timestamp'");
+			echo mysqli_num_rows($res);
+			?>
+		</span>
+	</a>
+	<!-- Dropdown - reminder -->
+	<div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="reminderDropdown">
+		<h6 class="dropdown-header">
+			Reminder Center
+		</h6>
 
 
+		<div id="notificationReminder">
+			<!--   notification show   -->
+			<?php
+			$user = $_SESSION["user_name"];
+			if ($_SESSION['user_role_id'] == 0 || $_SESSION['user_role_id'] == 2) {
+
+				$query = mysqli_query($db, "SELECT * FROM reminder WHERE remark= '' and sales_person = '" . $_SESSION['user_name'] . "' and  reminder_date <= '$timestamp' ORDER by id");
+				// notification count 
+
+				if (mysqli_num_rows($query) > 0) {
+					while ($row = mysqli_fetch_array($query)) {
+			?>
+						<a class="dropdown-item d-flex align-items-center" href="<?php
+																					if ($row['page'] == "potential") {
+																						echo "Potential-view.php?view_potential=" . $row['reminderID'];
+																					} else if ($row['page'] == "lead") {
+																						echo "lead-view.php?lead=" . $row['reminderID'];
+																					} else {
+																					} ?>">
+							<div class="mr-3">
+								<div class="icon-circle bg-primary">
+									<!-- php echo first name letter -->
+									<p class="first-chr">
+										<?php
+										//Example string.
+										$string = $row['name'];
+										//generate  mb_substr to the get first letter of the character.
+										$GetfirstChar = mb_substr($string, 0, 1, "UTF-8");
+
+										//now Print the first character.
+										echo $GetfirstChar;
+										?>
+									</p>
+								</div>
+							</div>
+							<div>
+								<span class="font-weight-bold"><?php echo $row['name'] .
+																	" <i>(PENDIND)</i> "
+
+																?></span><br>
+								<span class="font-weight-bold"><?php echo $row['note'];     ?></span>
+
+								<!-- notifaction date -->
+								<div class="small text-gray-500">
+									<?php
+									$time = $row['time'];
+									echo date('d-m-Y, g:i A',  strtotime($time));
+									?>
+								</div>
 
 
+							</div>
+						</a>
+					<?php
+					}
+				} else {
+					?>
+					<div class="alert alert-warning">
+						No Notification Found ...
+					</div>
+			<?php
+				}
+			}
+
+			?>
 
 
+		</div>
+
+		<a class="dropdown-item text-center small text-gray-500 bg-theme" href="#">Read More Messages</a>
+	</div>
+</li>
+
+
+$query = "
+SELECT *
+FROM reminder
+WHERE remark = ''
+AND sales_person = '" . $_SESSION['user_name'] . "'
+AND reminder_date <= '$timestamp'
+	GROUP BY customer_id
+	ORDER BY reminder_date DESC ";
+
+
+	eminder Center
+R
+
+Ranjit (PENDING)
+testing6
+06-03-2025, 3:30 PM
+a
+
+Sashi (PENDING)
+testing6
+06-03-2025, 3:35 PM
+a
+
+
+anurag (PENDING)
+a
+06-03-2025, 5:02 PM
