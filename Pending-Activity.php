@@ -112,6 +112,25 @@ if ($getStatus['status'] == 0) {
             <!--  end  alert -->
           </div>
 
+          <!--  searching salespersonwise start-->
+
+          <div class="col-sm-2 mb-2 mt-4">
+            <div class="input-group">
+              <select class="form-control" id="searchByPendingActivity">
+                <option class="bg-danger text-light">Search Person Wise</option>
+                <?php
+                $salse = 0;
+                $both = 2;
+                $query_list = mysqli_query($conn, "SELECT * FROM users WHERE (user_role_id ='$salse' || user_role_id ='$both') ORDER by user_name ASC");
+                while ($row = mysqli_fetch_array($query_list)) {
+                ?><option value="<?php echo $row['user_name']; ?>"><?php echo $row['user_name']; ?></option>
+                <?php } ?>
+              </select>
+            </div>
+          </div>
+
+
+          <!--  searching salespersonwise end-->
         </div>
 
         <!-- Table -->
@@ -136,25 +155,29 @@ if ($getStatus['status'] == 0) {
           var dataTable = $('#fetchTable').DataTable({
             'processing': true,
             'serverSide': true,
-            "responsive": true,
-            "scrollY": 350,
-            "order": [],
-            "pagingType": "full_numbers",
+            'responsive': true,
+            'scrollY': 350,
+            'order': [],
+            'pagingType': 'full_numbers',
             'serverMethod': 'post',
-            //'searching': false, // Remove default Search Control
             'ajax': {
               'url': 'load-data/pending-activity-ajax.php',
               'data': function(data) {
-                // Read values
                 var activity = $('#searchByPendingActivity').val();
                 var leadType = $('#searchByleadType').val();
-                // Append to data 
+                // Pass the filter parameters to the server
                 data.searchByPendingActivity = activity;
                 data.searchByleadType = leadType;
+              },
+              'error': function(xhr, error, thrown) {
+                console.log("Error fetching data: " + error);
+                console.log("Response: " + xhr.responseText);
               }
-            },
+            }
           });
-          $('#searchByPendingActivity,#searchByleadType').change(function() {
+
+          // Refresh the DataTable when filters change
+          $('#searchByPendingActivity, #searchByleadType').change(function() {
             dataTable.draw();
           });
         });

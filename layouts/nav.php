@@ -126,42 +126,8 @@
             $user = $_SESSION["user_name"];
             if ($_SESSION['user_role_id'] == 0 || $_SESSION['user_role_id'] == 2) {
 
-              // Notification count query
-              $query = mysqli_query(
-                $db,
-                "WITH RankedReminders AS (
-            SELECT
-                reminderID,
-                name,
-                note,
-                date,
-                time,
-                remark,
-                sales_person,
-                page,
-                created_date,
-                reminder_date,
-                ROW_NUMBER() OVER (PARTITION BY reminderID ORDER BY reminder_date DESC) AS rn
-            FROM reminder
-            WHERE remark = '' 
-                AND sales_person = '" . $_SESSION['user_name'] . "'
-                AND reminder_date IS NOT NULL
-        )
-        SELECT 
-            reminderID,
-            name,
-            note,
-            date,
-            time,
-            remark,
-            sales_person,
-            page,
-            created_date,
-            reminder_date
-        FROM RankedReminders
-        WHERE rn = 1
-        ORDER BY reminder_date DESC;"
-              );
+              $query = mysqli_query($db, "SELECT * FROM reminder WHERE remark= '' and sales_person = '" . $_SESSION['user_name'] . "' and  reminder_date <= '$timestamp' ORDER by id");
+              // notification count 
 
               if (mysqli_num_rows($query) > 0) {
                 while ($row = mysqli_fetch_array($query)) {
@@ -171,36 +137,46 @@
                                                                               echo "Potential-view.php?view_potential=" . $row['reminderID'];
                                                                             } else if ($row['page'] == "lead") {
                                                                               echo "lead-view.php?lead=" . $row['reminderID'];
-                                                                            }
-                                                                            ?>">
+                                                                            } else {
+                                                                            } ?>">
                     <div class="mr-3">
                       <div class="icon-circle bg-primary">
-                        <!-- PHP echo first name letter -->
+                        <!-- php echo first name letter -->
                         <p class="first-chr">
                           <?php
-                          // Example string
-                          $string = $row['name'];
-                          // Generate mb_substr to get the first letter of the character
+                          //Example string.
+                          // Assuming $row is an associative array containing the data for a specific lead.
+                          $string = $row['name']; // original name without link
+
+                          // To add the link to the name field
+                          $sub_array[] = '<a href="lead-view.php?lead=' . $row['id'] . '" class="user">' . $row['name'] . '</a>';
+
+                          //generate  mb_substr to the get first letter of the character.
                           $GetfirstChar = mb_substr($string, 0, 1, "UTF-8");
-                          // Print the first character
+
+                          //now Print the first character.
                           echo $GetfirstChar;
                           ?>
                         </p>
                       </div>
                     </div>
                     <div>
-                      <span class="font-weight-bold">
-                        <?php echo $row['name'] . " <i>(PENDING)</i>"; ?>
-                      </span><br>
-                      <span class="font-weight-bold"><?php echo $row['note']; ?></span>
+                      <span class="font-weight-bold"><?php echo $row['name'] .
+                                                        " <i>(PENDIND)</i> "
 
-                      <!-- Notification date -->
+                                                      ?></span><br>
+                      <span class="font-weight-bold"><?php echo $row['note'];     ?></span>
+
+                      <!-- notifaction date -->
                       <div class="small text-gray-500">
                         <?php
+                        // $time = $row['created_date'];
                         $time = $row['reminder_date'];
-                        echo date('d-m-Y, g:i A', strtotime($time));
+                        echo date('d-m-Y, g:i A',  strtotime($time));
                         ?>
                       </div>
+
+
                     </div>
                   </a>
                 <?php
@@ -213,6 +189,7 @@
             <?php
               }
             }
+
             ?>
 
 

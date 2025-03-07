@@ -274,3 +274,58 @@ a
 anurag (PENDING)
 a
 06-03-2025, 5:02 PM
+
+
+<?php
+require_once 'config.php';
+
+if (isset($_POST["name"])) {
+	// Sanitize input data
+	$name = mysqli_real_escape_string($conn, $_POST["name"]);
+	$note = mysqli_real_escape_string($conn, $_POST["note"]);
+	$date = mysqli_real_escape_string($conn, $_POST["date"]);
+	$time = mysqli_real_escape_string($conn, $_POST["time"]);
+	$DataID = mysqli_real_escape_string($conn, $_POST["DataID"]);
+	$sales_person = mysqli_real_escape_string($conn, $_POST["sales"]);
+	$page = mysqli_real_escape_string($conn, $_POST["page"]);
+
+	// Check if 'remark' exists and sanitize it, if not set it to NULL
+	$remark = isset($_POST["remark"]) ? mysqli_real_escape_string($conn, $_POST["remark"]) : null;
+
+	// Get current timestamp
+	$timestamp = date('Y-m-d H:i:s');
+
+	// Query to get the last reminder based on 'name'
+	// $check_reminder_query = "SELECT * FROM reminder WHERE name = '$name' ORDER BY reminderID DESC LIMIT 2";
+	$check_reminder_query = "SELECT * FROM reminder WHERE name = '$name' ORDER BY reminderID DESC LIMIT 2";
+	$check_reminder_result = mysqli_query($conn, $check_reminder_query);
+
+	if ($check_reminder_result) {
+		$reminders = mysqli_fetch_all($check_reminder_result, MYSQLI_ASSOC);
+
+		// Check if there is a previous reminder and its remark
+		if (count($reminders) > 0) {
+			$previous_reminder = $reminders[1]; // Last reminder
+
+			// If the previous reminder has no remark and the new reminder also has no remark
+			if (empty($previous_reminder['remark']) && empty($remark)) {
+				echo 'Please fill in the remark of the previous reminder before adding a new one.';
+				exit;
+			}
+		}
+		// If there is no previous reminder, it's the first reminder, so no remark is required
+	} else {
+		echo 'Error fetching previous reminders: ' . mysqli_error($conn);
+		exit;
+	}
+
+	// Insert the new reminder into the database
+	$query = "INSERT INTO reminder (reminderID, name, note, date, time, sales_person, page, created_date, reminder_date, remark) 
+              VALUES ('$DataID', '$name', '$note', '$date', '$time:00', '$sales_person', '$page', '$timestamp', '$date $time:00', '$remark')";
+
+	if (mysqli_query($conn, $query)) {
+		echo 'Reminder set successfully';
+	} else {
+		echo 'Error setting reminder: ' . mysqli_error($conn);
+	}
+}

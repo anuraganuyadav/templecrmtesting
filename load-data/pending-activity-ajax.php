@@ -25,18 +25,18 @@ $count = mysqli_num_rows($data);
 
 // condition 1
 if ($count != 1) {
-  if (mysqli_query($conn, "INSERT INTO filter (userID, pending_activity, lead_type) VALUES ('$userID','$pending_activity','$leadType')")) {
+  if (mysqli_query($conn, "INSERT INTO filter (userID, pending_activity, sl_Status) VALUES ('$userID','$pending_activity','$leadType')")) {
   }
 }
 //end  condition 1
 
 // condition 2
 elseif ($count == 1) {
-  if (mysqli_query($conn, "UPDATE filter SET pending_activity = '$pending_activity' ,  lead_type = '$leadType'  WHERE userID= $userID")) {
+  if (mysqli_query($conn, "UPDATE filter SET pending_activity = '$pending_activity' ,  sl_Status = '$leadType'  WHERE userID= $userID")) {
   }
 }
 //end  condition 2
- 
+
 
 ?>
 <?php
@@ -57,7 +57,7 @@ $searchByleadType = $_POST["searchByleadType"];
 ## Search 
 $searchQuery = " ";
 
-if($searchByleadType !=''){
+if ($searchByleadType != '') {
   $searchQuery .= " and page = '$searchByleadType'";
 }
 
@@ -123,7 +123,7 @@ while ($row = mysqli_fetch_assoc($potentialRecords)) {
   } else if ($row['page'] == "potential") {
     $sub_array[] = '<a href="Potential-view.php?view_potential=' . $row['reminderID'] . '"  class="user">' . $row["name"] . '</a>';
   };
- //end lead page
+  //end lead page
   $sub_array[] = $row['note'];
   $sub_array[] = date('d-M/Y, g;i A', strtotime($row['reminder_date']));
   $sub_array[] = $row['remark'];

@@ -553,6 +553,51 @@ if ($getStatus['status'] == 0) {
                 alert("Some Fields is required");
               }
             });
+            // $(document).on('click', '#insert', function() {
+            //   var DataID = $('#dataid').val();
+            //   var name = $('#dataName').val();
+            //   var note = $('#dataNote').val();
+            //   var date = $('#date-format').val();
+            //   var time = $('.time-input').val();
+            //   var sales = $('#sales').val();
+            //   var page = $('#page').val();
+            //   var remark = $('#remark').val(); // Get the value of the remark field
+
+            //   // Check if all necessary fields are filled in
+            //   if (name != '' && note != '' && date != '' && time != '' && DataID != '') {
+            //     $.ajax({
+            //       url: "inc/insert-REMINDER.php",
+            //       method: "POST",
+            //       data: {
+            //         name: name,
+            //         note: note,
+            //         time: time,
+            //         date: date,
+            //         DataID: DataID,
+            //         sales: sales,
+            //         page: page,
+            //         remark: remark // Include the remark field in the request
+            //       },
+            //       success: function(data) {
+            //         // Show success message
+            //         $('#messageAlert').html('<div class="alert alert-success">' + data + '</div>');
+
+            //         // Reload relevant sections of the page
+            //         $("#reminder").load("reminder.php");
+            //         $("#Alarm").load("load-data/reminderFetch.php");
+            //       }
+            //     });
+
+            //     // Clear the success message after 5 seconds
+            //     setInterval(function() {
+            //       $('#messageAlert').html('');
+            //     }, 5000);
+
+            //   } else {
+            //     alert("Some Fields are required");
+            //   }
+            // });
+
             // delete reminder 
             $(document).on('click', '.delete', function() {
               var id = $(this).attr("id");
