@@ -113,21 +113,24 @@ if ($getStatus['status'] == 0) {
           </div>
 
           <!--  searching salespersonwise start-->
-
+          <!-- Salesperson Wise Search -->
           <div class="col-sm-2 mb-2 mt-4">
             <div class="input-group">
-              <select class="form-control" id="searchByPendingActivity">
-                <option class="bg-danger text-light">Search Person Wise</option>
+              <select class="form-control" id="searchBySalesPerson">
+                <option class="bg-danger text-light" value="">Search Person Wise</option>
+                
                 <?php
-                $salse = 0;
-                $both = 2;
-                $query_list = mysqli_query($conn, "SELECT * FROM users WHERE (user_role_id ='$salse' || user_role_id ='$both') ORDER by user_name ASC");
+                
+                // Fetch salespeople
+                $query_list = mysqli_query($conn, "SELECT * FROM users WHERE user_role_id IN (0, 2) ORDER BY user_name ASC");
                 while ($row = mysqli_fetch_array($query_list)) {
-                ?><option value="<?php echo $row['user_name']; ?>"><?php echo $row['user_name']; ?></option>
-                <?php } ?>
+                  echo "<option value='" . $row['user_name'] . "'>" . $row['user_name'] . "</option>";
+                }
+                ?>
               </select>
             </div>
           </div>
+
 
 
           <!--  searching salespersonwise end-->
@@ -165,9 +168,11 @@ if ($getStatus['status'] == 0) {
               'data': function(data) {
                 var activity = $('#searchByPendingActivity').val();
                 var leadType = $('#searchByleadType').val();
+                var salesperson = $('#searchBySalesPerson').val();
                 // Pass the filter parameters to the server
                 data.searchByPendingActivity = activity;
                 data.searchByleadType = leadType;
+                data.searchBySalesPerson = salesperson;
               },
               'error': function(xhr, error, thrown) {
                 console.log("Error fetching data: " + error);
@@ -177,7 +182,7 @@ if ($getStatus['status'] == 0) {
           });
 
           // Refresh the DataTable when filters change
-          $('#searchByPendingActivity, #searchByleadType').change(function() {
+          $('#searchByPendingActivity, #searchByleadType,#searchBySalesPerson').change(function() {
             dataTable.draw();
           });
         });
@@ -186,9 +191,9 @@ if ($getStatus['status'] == 0) {
       <script type="text/javascript" src="asset/date-range/dist/duDatepicker.min.js"></script>
     </div>
 
-    <?php
-    include_once("layouts/footer.php");
-  } else {
-    echo "<h4>You can't acccess this page </h4>";
-  }
-    ?>>
+  <?php
+  include_once("layouts/footer.php");
+} else {
+  echo "<h4>You can't acccess this page </h4>";
+}
+  ?>

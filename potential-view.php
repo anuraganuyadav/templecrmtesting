@@ -11,22 +11,50 @@ if ($_SESSION['user_role_id'] == 0 && $_SESSION['user_role_id'] == 1 && $_SESSIO
 
   header("Location:index.php");
 }
-
 error_reporting(~E_NOTICE);
 require_once 'inc/config.php';
+
 if (isset($_GET['view_potential']) && !empty($_GET['view_potential'])) {
 
   $uid = $_GET['view_potential'];
   $_SESSION['potential_id'] = $_GET['view_potential'];
   $_SESSION['clid'] = $_GET['view_potential'];
 
-  $stmt_edit = $DB_con->prepare('SELECT * FROM potential WHERE id =:uid');
+  // Prepare the query
+  $stmt_edit = $DB_con->prepare('SELECT * FROM potential WHERE id = :uid');
   $stmt_edit->execute(array(':uid' => $uid));
   $edit_row = $stmt_edit->fetch(PDO::FETCH_ASSOC);
-  extract($edit_row);
+
+  // Check if the query returned a result
+  if ($edit_row) {
+    // If data is found, extract the result
+    extract($edit_row);
+  } else {
+    // If no result is found, redirect or handle error
+    echo "No data found for the given ID.";
+
+    exit;
+  }
 } else {
   header("Location: index.php");
+  exit;
 }
+
+// error_reporting(~E_NOTICE);
+// require_once 'inc/config.php';
+// if (isset($_GET['view_potential']) && !empty($_GET['view_potential'])) {
+
+//   $uid = $_GET['view_potential'];
+//   $_SESSION['potential_id'] = $_GET['view_potential'];
+//   $_SESSION['clid'] = $_GET['view_potential'];
+
+//   $stmt_edit = $DB_con->prepare('SELECT * FROM potential WHERE id =:uid');
+//   $stmt_edit->execute(array(':uid' => $uid));
+//   $edit_row = $stmt_edit->fetch(PDO::FETCH_ASSOC);
+//   extract($edit_row);
+// } else {
+//   header("Location: index.php");
+// }
 
 //page veryfied by user status
 $getUser = mysqli_query($conn, "SELECT status from users where userID = " . $_SESSION['userID'] . "");
@@ -69,6 +97,7 @@ if ($getStatus['status'] == 0) {
     <link rel="stylesheet" type="text/css" href="asset/date-range/dist/duDatepicker.min.css">
     <link rel="stylesheet" type="text/css" href="asset/date-range/dist/duDatepicker-theme.css">
     </head>
+    <!-- "Return Back" Button to Same Page -->
 
     <body class="fixed-nav sticky-footer bg-dark" id="page-top">
       <?php include_once("layouts/sidebar.php"); ?>
@@ -177,10 +206,16 @@ if ($getStatus['status'] == 0) {
                 </select>
                 <div class="addInAccount text-right mt-5">
                   <?php
+                  // $CDB_HOST = 'localhost';
+                  // $CDB_USER = 'account_crm';
+                  // $CDB_PASS = 'q^Qgm8%uOH!e';
+                  // $CDB_NAME = 'account_crm';
+
                   $CDB_HOST = 'localhost';
-                  $CDB_USER = 'account_crm';
-                  $CDB_PASS = 'q^Qgm8%uOH!e';
-                  $CDB_NAME = 'account_crm';
+                  $CDB_USER = 'root';
+                  $CDB_PASS = '';
+                  $CDB_NAME = 'templecrm';
+
                   $connAcc = mysqli_connect("$CDB_HOST", "$CDB_USER", "$CDB_PASS", "$CDB_NAME");
                   mysqli_select_db($connAcc, $CDB_NAME);
 
@@ -194,10 +229,10 @@ if ($getStatus['status'] == 0) {
                       if ($_SESSION['user_role_id'] == 1 || $_SESSION['user_role_id'] == 2) {
 
 
-                        echo '<div class="input-group"><input type="number" class="form-control received_amount update" data-id="'.$id.'" data-column="received_amount"  placeholder="enter amount*" value="' . $received_amount . '">
+                        echo '<div class="input-group"><input type="number" class="form-control received_amount update" data-id="' . $id . '" data-column="received_amount"  placeholder="enter amount*" value="' . $received_amount . '">
                       <button type="button" data-id="' . $id . '" class="btn btn-sm btn-success AddInAcount">Add In Account</button></div>';
                       } else {
-                        echo '<div class="input-group"><input type="number" data-id="'.$id.'" data-column="received_amount"  class="form-control received_amount update" placeholder="enter amount*" value="' . $received_amount . '"></div>';
+                        echo '<div class="input-group"><input type="number" data-id="' . $id . '" data-column="received_amount"  class="form-control received_amount update" placeholder="enter amount*" value="' . $received_amount . '"></div>';
                       }
                     }
                   }

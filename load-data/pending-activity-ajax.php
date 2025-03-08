@@ -8,17 +8,18 @@ if (!isset($_SESSION['userID'], $_SESSION['user_role_id'])) {
 }
 //identyfied
 if ($_SESSION['user_role_id'] != 1 && $_SESSION['user_role_id'] != 2) {
-
   header("Location:index.php");
 }
-
 
 //use any post value for subbmission if empty submission not work  
 $pending_activity = filter_var($_POST["searchByPendingActivity"]);
 $leadType = filter_var($_POST["searchByleadType"]);
 $userID = filter_var($_SESSION["userID"]);
 
+// Get the salesperson filter (if provided)
+$searchBySalesPerson = isset($_POST["searchBySalesPerson"]) ? $_POST["searchBySalesPerson"] : '';
 
+// Handle filter storage (same logic as before)
 $dest = "SELECT * FROM `filter` WHERE userID='$userID'";
 $data = mysqli_query($conn, $dest);
 $count = mysqli_num_rows($data);
@@ -29,7 +30,6 @@ if ($count != 1) {
   }
 }
 //end  condition 1
-
 // condition 2
 elseif ($count == 1) {
   if (mysqli_query($conn, "UPDATE filter SET pending_activity = '$pending_activity' ,  sl_Status = '$leadType'  WHERE userID= $userID")) {
@@ -37,30 +37,27 @@ elseif ($count == 1) {
 }
 //end  condition 2
 
-
 ?>
 <?php
 
-
-## Read value
+// Read value for DataTables
 $draw = $_POST['draw'];
 $row = $_POST['start'];
 $rowperpage = $_POST['length']; // Rows display per page 
 $searchValue = $_POST['search']['value']; // Search value
 
 
-## Custom Field value
+// Custom Filters
 $searchByPendingActivity = $_POST["searchByPendingActivity"];
 $searchByleadType = $_POST["searchByleadType"];
 
 
-## Search 
+// Building the search query
 $searchQuery = " ";
 
 if ($searchByleadType != '') {
   $searchQuery .= " and page = '$searchByleadType'";
 }
-
 
 // search by searchByPendingActivity
 
@@ -74,8 +71,13 @@ if (!empty($searchByPendingActivity)) {
   }
 }
 
+// Salesperson filter - Only apply if selected
+if (!empty($searchBySalesPerson)) {
+  $searchQuery .= " and sales_person = '$searchBySalesPerson' ";
+}
 
 
+// Generic Search (by name, email, or phone number)
 if ($searchValue != '') {
   $searchQuery .= " and (name like '%" . $searchValue . "%' or 
         email like '%" . $searchValue . "%' or 
@@ -109,6 +111,8 @@ if (isset($_POST["order"])) {
   $order = 'ORDER BY timestamp(date) DESC ';
 }
 
+// Final query to fetch records with filters
+
 $potentialQuery = "select * from reminder WHERE 1 " . $searchQuery . $order . " limit " . $row . "," . $rowperpage;
 
 
@@ -129,18 +133,17 @@ while ($row = mysqli_fetch_assoc($potentialRecords)) {
   $sub_array[] = $row['remark'];
   $sub_array[] = $row['sales_person'];
 
-  //if pending remark
+  // If remark is empty, display pending status
   if (empty($row['remark'])) {
     $sub_array[] = "pending";
   } else {
     $sub_array[] = "<span class='text-success'>success</span>";
   };
   //end if pending remark
-
   $data[] = $sub_array;
 }
 
-## Activity
+// Output data in JSON format for DataTables
 $activity = array(
   "draw" => intval($draw),
   "iTotalRecords" => $totalRecords,

@@ -7,8 +7,11 @@ li {
     list-style: none;
 }
 
-.container-fluid, .table, .card-footer, .copyright {
-    color: #000!important;
+.container-fluid,
+.table,
+.card-footer,
+.copyright {
+    color: #000 !important;
 }
 
 .outer-upload {
@@ -20,9 +23,11 @@ li {
     overflow: hidden;
     display: flex;
 }
-.with-100{
+
+.with-100 {
     width: 100px;
 }
+
 .image-upload {
     width: 100%;
     display: block;
@@ -52,21 +57,21 @@ li {
 .fr-select {
     font-size: 14px;
     padding: 0px !important;
-    background-color: #046960!important;
-    color: white!important;
+    background-color: #046960 !important;
+    color: white !important;
     cursor: pointer;
 }
 
 .fr-select:focus {
     font-size: 14px;
     padding: 0px !important;
-    background-color: #0fb87b!important;
-    color: white!important;
+    background-color: #0fb87b !important;
+    color: white !important;
 }
 
 .selected-cr {
-    color: white!important;
-    background-color: #046960!important;
+    color: white !important;
+    background-color: #046960 !important;
 }
 
 option {
@@ -81,7 +86,7 @@ option {
 
 .form-control-user-style1 {
     font-size: .8rem;
-    border-radius: 0px!important;
+    border-radius: 0px !important;
 }
 
 .fa-ic {
@@ -90,9 +95,11 @@ option {
     color: white
 }
 
-.btn-sub, .btn-sub:hover, .btn-sub:focus {
+.btn-sub,
+.btn-sub:hover,
+.btn-sub:focus {
     background-color: #00a52f !important;
-    color: #fff!important;
+    color: #fff !important;
 }
 
 .bg-modal {
@@ -146,10 +153,11 @@ option {
 }
 
 .under-cr {
-    padding: 20px!important;
+    padding: 20px !important;
 }
 
-.name, .lname {
+.name,
+.lname {
     text-transform: capitalize;
 }
 
@@ -165,13 +173,13 @@ option {
     list-style: none;
     width: 159px;
 }
- 
+
 .ma-edit {
     float: right;
 }
 
 .hide-datepicker:focus {
-    display: none!important;
+    display: none !important;
 }
 
 /*travel description*/
@@ -241,25 +249,29 @@ form-control-user-note {
     width: 35px;
     height: 35px;
 }
- 
+
 /*table*/
 
 .bootstrap-table .fixed-table-container .table thead th .sortable {
-    padding: 1px 20px!important;
-    font-size: 13px!important;
+    padding: 1px 20px !important;
+    font-size: 13px !important;
 }
+
 table.dataTable {
     width: 100%;
     margin: 0 !important;
 }
 
-.fresh-table .bootstrap-table .table>tfoot>tr>th, .fresh-table .bootstrap-table .table>thead>tr>th, .fresh-table .bootstrap-table .table>tbody>tr>td, .fresh-table .bootstrap-table .table>tfoot>tr>td {
-    padding: 13px 0px!important;
+.fresh-table .bootstrap-table .table>tfoot>tr>th,
+.fresh-table .bootstrap-table .table>thead>tr>th,
+.fresh-table .bootstrap-table .table>tbody>tr>td,
+.fresh-table .bootstrap-table .table>tfoot>tr>td {
+    padding: 13px 0px !important;
     vertical-align: middle;
 }
 
 .fresh-table .bootstrap-table .table tbody>tr>td {
-    padding: 11px 4px!important;
+    padding: 11px 4px !important;
     font-size: 13px;
     color: #210d0d;
     text-align: center;
@@ -399,8 +411,35 @@ table.dataTable {
 }
 
 
- 
-#searchByFdate, #uid, #Fdate, #Ldate,#target, #searchByLdate, #searchByStatus, #searchByDateWise, #filterBeforeDate, #searchByDestination, #filterSales, #filter#send, #searchBySales, #searchByBeforeDate, #filterStatus, #pending_sctivity, #apply, #searchByPendingActivity, #DateType, #nowDate, #searchByleadType, #filterStatus, #filterType, #LeadFilter, #AdminfilterSales, #leadDateType, #to-date {
+
+#searchByFdate,
+#uid,
+#Fdate,
+#Ldate,
+#target,
+#searchByLdate,
+#searchByStatus,
+#searchByDateWise,
+#filterBeforeDate,
+#searchByDestination,
+#filterSales,
+#filter#send,
+#searchBySales,
+#searchByBeforeDate,
+#filterStatus,
+#pending_sctivity,
+#apply,
+#searchByPendingActivity,
+#DateType,
+#nowDate,
+#searchByleadType,
+#filterStatus,
+#filterType,
+#LeadFilter,
+#AdminfilterSales,
+#leadDateType,
+#to-date,
+#searchBySalesPerson {
     background: url(../../images/img/btn.jpg);
     background-size: cover;
     border-right: 1px solid #ffffff;
@@ -413,7 +452,33 @@ table.dataTable {
 }
 
 
-#searchByFdate:focus,#uid, #Fdate, #Ldate,#target, #searchByLdate:focus, #searchByStatus:focus, #searchByDateWise:focus, #filterBeforeDate:focus, #searchByDestination:focus, #filterSales:focus, #filter#send:focus, #searchBySales:focus, #searchByBeforeDate:focus, #filterStatus:focus, #LeadFilter:focus, #pending_sctivity:focus, #apply:focus, #DateType:focus, #searchByleadType:focus, #nowDate:focus, #searchByPendingActivity:focus, #filterStatus:focus, #filterType:focus, #AdminfilterSales:focus, #leadDateType:focus {
+#searchByFdate:focus,
+#uid,
+#Fdate,
+#Ldate,
+#target,
+#searchByLdate:focus,
+#searchByStatus:focus,
+#searchByDateWise:focus,
+#filterBeforeDate:focus,
+#searchByDestination:focus,
+#filterSales:focus,
+#filter#send:focus,
+#searchBySales:focus,
+#searchByBeforeDate:focus,
+#filterStatus:focus,
+#LeadFilter:focus,
+#pending_sctivity:focus,
+#apply:focus,
+#DateType:focus,
+#searchByleadType:focus,
+#nowDate:focus,
+#searchByPendingActivity:focus,
+#filterStatus:focus,
+#filterType:focus,
+#AdminfilterSales:focus,
+#leadDateType:focus,
+#searchBySalesPerson {
     background-image: url(../../images/img/btn.jpg);
     background-size: cover;
     border-right: 1px solid #ffffff;
@@ -425,15 +490,42 @@ table.dataTable {
     ;
 }
 
-#searchByFdate, #uid, #Fdate, #Ldate,#target, #searchByLdate, #searchByStatus, .clear-s, .filter-s, #searchByDateWise, #filterBeforeDate, #searchByDestination, #filterSales, #searchByPendingActivity, #filterStatus, #searchByBeforeDate, #searchByleadType, #filterStatus, #searchBySales, #LeadFilter, #DateType, #nowDate, #filterType, #AdminfilterSales, #leadDateType {
+#searchByFdate,
+#uid,
+#Fdate,
+#Ldate,
+#target,
+#searchByLdate,
+#searchByStatus,
+.clear-s,
+.filter-s,
+#searchByDateWise,
+#filterBeforeDate,
+#searchByDestination,
+#filterSales,
+#searchByPendingActivity,
+#filterStatus,
+#searchByBeforeDate,
+#searchByleadType,
+#filterStatus,
+#searchBySales,
+#LeadFilter,
+#DateType,
+#nowDate,
+#filterType,
+#AdminfilterSales,
+#leadDateType,
+#searchBySalesPerson {
     box-shadow: 2px 2px 2px #b3a3a3;
     background: url(../../images/img/btn.jpg);
     background-size: cover;
     font-size: 13px;
     background-color: #703329 !important;
     color: #fff !important;
+    padding: 0px;
 }
-.amt{
+
+.amt {
     background-color: #5e231b;
     padding: 6px 4px;
     height: 34px;
@@ -443,7 +535,7 @@ table.dataTable {
 }
 
 /* table external css  */
-#fetchTable_processing{
+#fetchTable_processing {
     position: absolute;
     z-index: 999;
     color: #000 !important;
@@ -455,6 +547,7 @@ table.dataTable {
     margin-top: -25px;
     padding-top: 6px !important;
 }
+
 .dataTables_scrollHead {
     opacity: 0.8;
     background: url(../../images/img/bck_pattern.jpg);
@@ -467,16 +560,26 @@ table.dataTable {
 element.style {
     width: 196px;
 }
-table.dataTable thead th:active, table.dataTable thead td:active {
+
+table.dataTable thead th:active,
+table.dataTable thead td:active {
     outline: none;
     /* color: #fff; */
 }
-table.dataTable thead .sorting ,  table.dataTable thead .sorting_desc, table.dataTable thead .sorting_asc{
+
+table.dataTable thead .sorting,
+table.dataTable thead .sorting_desc,
+table.dataTable thead .sorting_asc {
     color: #fff;
-    font-weight: inherit; 
+    font-weight: inherit;
     text-shadow: 0px 1px 1px black;
-} 
-.dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate {
+}
+
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_filter,
+.dataTables_wrapper .dataTables_info,
+.dataTables_wrapper .dataTables_processing,
+.dataTables_wrapper .dataTables_paginate {
     background: url(../../images/img/bck_pattern.jpg);
     background-size: contain;
     border-color: rgba(255, 255, 255, 0.15);
@@ -486,7 +589,8 @@ table.dataTable thead .sorting ,  table.dataTable thead .sorting_desc, table.dat
     color: #fff !important;
 }
 
-#fetchTable input, #fetchTable select {
+#fetchTable input,
+#fetchTable select {
     border: none;
     width: 100%;
 }
@@ -506,28 +610,33 @@ table.dataTable thead .sorting ,  table.dataTable thead .sorting_desc, table.dat
     background-color: green;
 }
 
-.date-adata { 
+.date-adata {
     font-size: 13px;
-    white-space: nowrap; 
+    white-space: nowrap;
 }
-.date-data-break { 
+
+.date-data-break {
     font-size: 13px;
     white-space: break-spaces;
 }
-.mo-responsive{
+
+.mo-responsive {
     width: 115px !important;
 }
-.pax{
+
+.pax {
     width: 25px !important;
 }
 
- 
 
-#fetchTable th, #fetchTable td {
+
+#fetchTable th,
+#fetchTable td {
     border: 1px solid #e3e6f0 !important;
 }
 
-table.dataTable thead th, table.dataTable thead td {
+table.dataTable thead th,
+table.dataTable thead td {
     border: 1px solid #5f2828;
 }
 
@@ -577,8 +686,8 @@ table.dataTable thead th, table.dataTable thead td {
 }
 
 .collapse-inner {
-    border: 1px solid #bfb6b6!important;
-    box-shadow: 0 0.15rem 0.75rem 0 rgba(14, 36, 255, 0.44)!important;
+    border: 1px solid #bfb6b6 !important;
+    box-shadow: 0 0.15rem 0.75rem 0 rgba(14, 36, 255, 0.44) !important;
 }
 
 .first-chr {
@@ -678,7 +787,7 @@ table.dataTable thead th, table.dataTable thead td {
 /*force-fullscreen modal*/
 
 .force-fullscreen {
-    padding-right: 0px!important;
+    padding-right: 0px !important;
 }
 
 .close-mail {
@@ -810,10 +919,12 @@ table.dataTable thead th, table.dataTable thead td {
     border: none;
     margin: 2px;
 }
-#leads, #potentials{
+
+#leads,
+#potentials {
     cursor: all-scroll;
 }
- 
+
 
 
 /* //date picker today date heighlight */
@@ -821,7 +932,8 @@ table.dataTable thead th, table.dataTable thead td {
     color: #ffffff !important;
     background-color: #763a30;
     border-radius: 100%;
-} 
+}
+
 /* media query */
 
 @media screen and (max-width: 767px) {
@@ -834,16 +946,22 @@ table.dataTable thead th, table.dataTable thead td {
         position: initial;
         z-index: 9;
     }
-    table.dataTable thead th, table.dataTable thead td {
+
+    table.dataTable thead th,
+    table.dataTable thead td {
         padding: 0px 15px 0px 4px !important;
         font-size: 14px !important;
         border-bottom: 1px solid #111 !important;
     }
-    table.dataTable tbody th, table.dataTable tbody td {
+
+    table.dataTable tbody th,
+    table.dataTable tbody td {
         padding: 0px 15px 0px 4px !important;
         font-size: 14px !important;
     }
-    #fetchTable input, #fetchTable select {
+
+    #fetchTable input,
+    #fetchTable select {
         border: none;
         width: fit-content !important;
     }
@@ -859,29 +977,40 @@ table.dataTable thead th, table.dataTable thead td {
         position: initial;
         z-index: 9;
     }
-    table.dataTable thead th, table.dataTable thead td {
+
+    table.dataTable thead th,
+    table.dataTable thead td {
         padding: 3px 19px;
         font-size: 14px;
         border-bottom: 1px solid #111;
     }
-    table.dataTable tbody th, table.dataTable tbody td {
+
+    table.dataTable tbody th,
+    table.dataTable tbody td {
         padding: 2px 1px;
         font-size: 14px;
     }
-    #fetchTable input, #fetchTable select {
+
+    #fetchTable input,
+    #fetchTable select {
         border: none;
         width: fit-content !important;
     }
 }
-.comming-soon img{
+
+.comming-soon img {
     transform-origin: 50% 0%;
     animation: pendulam 2s ease-in-out infinite;
 }
-@keyframes pendulam{
-    0%, 100%{
+
+@keyframes pendulam {
+
+    0%,
+    100% {
         transform: rotate(45deg);
     }
-    50%{
+
+    50% {
         transform: rotate(-45deg);
     }
 
@@ -898,35 +1027,58 @@ table.dataTable thead th, table.dataTable thead td {
     -moz-user-select: none;
     -ms-user-select: none;
 }
+
 .onoffswitch-checkbox {
     position: absolute;
     opacity: 0;
     pointer-events: none;
 }
+
 .onoffswitch-label {
-    display: block; overflow: hidden; cursor: pointer;
-    border: 2px solid #999999; border-radius: 20px;
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid #999999;
+    border-radius: 20px;
 }
+
 .onoffswitch-inner {
-    display: block; width: 200%; margin-left: -100%;
+    display: block;
+    width: 200%;
+    margin-left: -100%;
     transition: margin 0.3s ease-in 0s;
 }
-.onoffswitch-inner:before, .onoffswitch-inner:after {
-    display: block; float: left; width: 50%; height: 30px; padding: 0; line-height: 30px;
-    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+
+.onoffswitch-inner:before,
+.onoffswitch-inner:after {
+    display: block;
+    float: left;
+    width: 50%;
+    height: 30px;
+    padding: 0;
+    line-height: 30px;
+    font-size: 14px;
+    color: white;
+    font-family: Trebuchet, Arial, sans-serif;
+    font-weight: bold;
     box-sizing: border-box;
 }
+
 .onoffswitch-inner:before {
     content: "ON";
     padding-left: 10px;
-    background-color: #34A7C1; color: #FFFFFF;
+    background-color: #34A7C1;
+    color: #FFFFFF;
 }
+
 .onoffswitch-inner:after {
     content: "OFF";
     padding-right: 10px;
-    background-color: #EEEEEE; color: #999999;
+    background-color: #EEEEEE;
+    color: #999999;
     text-align: right;
 }
+
 .onoffswitch-switch {
     display: block;
     width: 17px;
@@ -940,14 +1092,17 @@ table.dataTable thead th, table.dataTable thead td {
     border-radius: 20px;
     transition: all 0.3s ease-in 0s;
 }
-.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+
+.onoffswitch-checkbox:checked+.onoffswitch-label .onoffswitch-inner {
     margin-left: 0;
 }
-.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
-    right: 0px; 
+
+.onoffswitch-checkbox:checked+.onoffswitch-label .onoffswitch-switch {
+    right: 0px;
 }
+
 /* ///////////////////////////////////////////////////////// */
-#altU{
+#altU {
     display: none;
     position: absolute;
     left: 45%;
@@ -959,11 +1114,13 @@ table.dataTable thead th, table.dataTable thead td {
     color: white;
     box-shadow: 0px 1px 6px 2px #808080;
 }
-.send-to-po, .send-to-po:focus { 
+
+.send-to-po,
+.send-to-po:focus {
     background-size: cover;
     border-right: 1px solid #ffffff;
     border-radius: 0;
-    font-size: 13px; 
+    font-size: 13px;
     color: #fff !important;
     margin-bottom: 3px;
     background-color: #06b5a5 !important;

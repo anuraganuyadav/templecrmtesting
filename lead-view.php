@@ -599,8 +599,42 @@ if ($getStatus['status'] == 0) {
             // });
 
             // delete reminder 
+            // $(document).on('click', '.delete', function() {
+            //   var id = $(this).attr("id");
+
+            //   if (confirm("Are you sure you want to remove this?")) {
+            //     $.ajax({
+            //       url: "inc/delete-REMINDER.php",
+            //       method: "POST",
+            //       data: {
+            //         id: id
+            //       },
+            //       success: function(data) {
+            //         // Check if the user is authorized
+            //         if (data == 'Not Authorized to perform this action!') {
+            //           alert('You are not authorized to delete this item!');
+            //         } else {
+            //           $('#messageAlert').html('<div class="alert alert-success">' + data + '</div>');
+            //           fetch_data();
+            //         }
+            //       }
+            //     });
+
+            //     $(this).parents("tr").animate({
+            //       backgroundColor: "#003"
+            //     }, "slow").animate({
+            //       opacity: "hide"
+            //     }, "slow");
+
+            //     setInterval(function() {
+            //       $('#messageAlert').html('');
+            //     }, 5000);
+            //   }
+            // });
+
             $(document).on('click', '.delete', function() {
               var id = $(this).attr("id");
+              var row = $(this).parents("tr"); // Store the row element to remove later
               if (confirm("Are you sure you want to remove this?")) {
                 $.ajax({
                   url: "inc/delete-REMINDER.php",
@@ -608,23 +642,34 @@ if ($getStatus['status'] == 0) {
                   data: {
                     id: id
                   },
-                  success: function(data) {
-                    $('#messageAlert').html('<div class="alert alert-success">' + data + '</div>');
+                  success: function(response) {
+                    console.log(response); // Debugging line to check the response
 
-                    fetch_data();
+                    if (response == 'Data Deleted') {
+                      // Fade out and remove the row from the UI after successful delete
+                      row.animate({
+                        backgroundColor: "#003"
+                      }, "slow").animate({
+                        opacity: "hide"
+                      }, "slow", function() {
+                        $(this).remove(); // Remove the row after the animation
+                      });
+
+                      // Optionally, refresh the data to ensure consistency
+                      fetch_data();
+                    } else {
+                      $('#messageAlert').html('<div class="alert alert-danger">' + response + '</div>');
+                    }
+                  },
+                  error: function(xhr, status, error) {
+                    console.log("Error: " + error); // Log the error to debug
+                    $('#messageAlert').html('<div class="alert alert-danger">Error: ' + error + '</div>');
                   }
                 });
-                $(this).parents("tr").animate({
-                    backgroundColor: "#003"
-                  }, "slow")
-                  .animate({
-                    opacity: "hide"
-                  }, "slow");
-                setInterval(function() {
-                  $('#messageAlert').html('');
-                }, 5000);
               }
             });
+
+
 
 
           });

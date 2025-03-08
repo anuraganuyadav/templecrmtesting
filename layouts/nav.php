@@ -101,105 +101,97 @@
         <a class="nav-link dropdown-toggle" href="#" id="reminderDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-stopwatch fa-fw notifi-text"></i>
 
-          <!-- Counter - remerk -->
+          <!-- Counter - reminder -->
           <span id="notificationReminderCount" class="badge badge-danger badge-counter">
             <!-- Counter number - reminder -->
             <?php
             // r count alert
             date_default_timezone_set('Asia/Kolkata');
             $timestamp = date('Y-m-d H:i:s');
-            $res = mysqli_query($db, "SELECT * FROM reminder WHERE remark= '' and sales_person = '" . $_SESSION['user_name'] . "' and reminder_date <= '$timestamp'");
+
+            // Admin will see all reminders, others will see only their own
+            if ($_SESSION['user_role_id'] == 2) {
+              // Admin: Show all reminders where the remark is empty and the reminder date is in the past or present
+              $res = mysqli_query($db, "SELECT * FROM reminder WHERE remark = '' AND reminder_date <= '$timestamp'");
+            } else {
+              // Other users: Show only their own reminders
+              $res = mysqli_query($db, "SELECT * FROM reminder WHERE remark = '' AND sales_person = '" . $_SESSION['user_name'] . "' AND reminder_date <= '$timestamp'");
+            }
+
             echo mysqli_num_rows($res);
             ?>
           </span>
         </a>
+
         <!-- Dropdown - reminder -->
         <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="reminderDropdown">
           <h6 class="dropdown-header">
             Reminder Center
           </h6>
 
-
           <div id="notificationReminder">
-            <!--   notification show   -->
+            <!-- Notification show -->
             <?php
-            $user = $_SESSION["user_name"];
-            if ($_SESSION['user_role_id'] == 0 || $_SESSION['user_role_id'] == 2) {
-
-              $query = mysqli_query($db, "SELECT * FROM reminder WHERE remark= '' and sales_person = '" . $_SESSION['user_name'] . "' and  reminder_date <= '$timestamp' ORDER by id");
-              // notification count 
-
-              if (mysqli_num_rows($query) > 0) {
-                while ($row = mysqli_fetch_array($query)) {
-            ?>
-                  <a class="dropdown-item d-flex align-items-center" href="<?php
-                                                                            if ($row['page'] == "potential") {
-                                                                              echo "Potential-view.php?view_potential=" . $row['reminderID'];
-                                                                            } else if ($row['page'] == "lead") {
-                                                                              echo "lead-view.php?lead=" . $row['reminderID'];
-                                                                            } else {
-                                                                            } ?>">
-                    <div class="mr-3">
-                      <div class="icon-circle bg-primary">
-                        <!-- php echo first name letter -->
-                        <p class="first-chr">
-                          <?php
-                          //Example string.
-                          // Assuming $row is an associative array containing the data for a specific lead.
-                          $string = $row['name']; // original name without link
-
-                          // To add the link to the name field
-                          $sub_array[] = '<a href="lead-view.php?lead=' . $row['id'] . '" class="user">' . $row['name'] . '</a>';
-
-                          //generate  mb_substr to the get first letter of the character.
-                          $GetfirstChar = mb_substr($string, 0, 1, "UTF-8");
-
-                          //now Print the first character.
-                          echo $GetfirstChar;
-                          ?>
-                        </p>
-                      </div>
-                    </div>
-                    <div>
-                      <span class="font-weight-bold"><?php echo $row['name'] .
-                                                        " <i>(PENDIND)</i> "
-
-                                                      ?></span><br>
-                      <span class="font-weight-bold"><?php echo $row['note'];     ?></span>
-
-                      <!-- notifaction date -->
-                      <div class="small text-gray-500">
-                        <?php
-                        // $time = $row['created_date'];
-                        $time = $row['reminder_date'];
-                        echo date('d-m-Y, g:i A',  strtotime($time));
-                        ?>
-                      </div>
-
-
-                    </div>
-                  </a>
-                <?php
-                }
-              } else {
-                ?>
-                <div class="alert alert-warning">
-                  No Notification Found ...
-                </div>
-            <?php
-              }
+            // Admin: show all reminders, others: show only their own
+            if ($_SESSION['user_role_id'] == 2) {
+              $query = mysqli_query($db, "SELECT * FROM reminder WHERE remark = '' AND reminder_date <= '$timestamp' ORDER BY id");
+            } else {
+              $query = mysqli_query($db, "SELECT * FROM reminder WHERE remark = '' AND sales_person = '" . $_SESSION['user_name'] . "' AND reminder_date <= '$timestamp' ORDER BY id");
             }
 
+            // Check if there are any reminders
+            if (mysqli_num_rows($query) > 0) {
+              while ($row = mysqli_fetch_array($query)) {
+            ?>
+                <a class="dropdown-item d-flex align-items-center" href="<?php
+                                                                          if ($row['page'] == "potential") {
+                                                                            echo "Potential-view.php?view_potential=" . $row['reminderID'];
+                                                                          } else if ($row['page'] == "lead") {
+                                                                            echo "lead-view.php?lead=" . $row['reminderID'];
+                                                                          } else {
+                                                                          } ?>">
+                  <div class="mr-3">
+                    <div class="icon-circle bg-primary">
+                      <p class="first-chr">
+                        <?php
+                        // Get the first character of the name to display
+                        $string = $row['name'];
+                        $GetfirstChar = mb_substr($string, 0, 1, "UTF-8");
+                        echo $GetfirstChar;
+                        ?>
+                      </p>
+                    </div>
+                  </div>
+                  <div>
+                    <span class="font-weight-bold"><?php echo $row['name'] . " <i>(PENDING)</i>"; ?></span><br>
+                    <span class="font-weight-bold"><?php echo $row['note']; ?></span>
+
+                    <!-- Notification date -->
+                    <div class="small text-gray-500">
+                      <?php
+                      $time = $row['reminder_date'];
+                      echo date('d-m-Y, g:i A',  strtotime($time));
+                      ?>
+                    </div>
+                  </div>
+                </a>
+              <?php
+              }
+            } else {
+              ?>
+              <div class="alert alert-warning">
+                No Notification Found ...
+              </div>
+            <?php
+            }
             ?>
 
-
           </div>
-
-
 
           <a class="dropdown-item text-center small text-gray-500 bg-theme" href="#">Read More Messages</a>
         </div>
       </li>
+
       <!-- Nav Item - Search Dropdown (Visible Only XS) -->
       <li class="nav-item dropdown no-arrow d-sm-none">
         <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
