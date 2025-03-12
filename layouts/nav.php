@@ -217,91 +217,120 @@
         <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-bell fa-fw notifi-text"></i>
           <!-- Counter - Alerts -->
-
           <span id="notificationCount" class="badge badge-danger badge-counter">
-            <!--  notification count-->
-            <!--Item notification- count -->
             <?php
             $user = $_SESSION["user_name"];
             if ($_SESSION['user_role_id'] == 0 || $_SESSION['user_role_id'] == 2) {
 
-              $user = $_SESSION['user_name'];
-              $query = mysqli_query($db, "SELECT * FROM lead WHERE sales_person = '$user' and status_now = '1'");
+              // Check if the user is a sales person or an admin
+              if ($_SESSION['user_role_id'] == 0) {
+                // Sales Person: Get the leads for today
+                $query = mysqli_query($db, "SELECT * FROM lead WHERE sales_person = '$user' AND status_now = '1' AND DATE(date) = CURDATE()");
+              } else {
+                // Admin: Get the lead notes for today
+                $query = mysqli_query($db, "SELECT * FROM lead_notes WHERE DATE(create_date) = CURDATE()");
+              }
+
               echo mysqli_num_rows($query);
             }
             ?>
           </span>
         </a>
+
         <!-- notification Alerts -->
-
-
         <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
           <!-- Dropdown - Alerts -->
           <h6 class="dropdown-header">
             Alerts Center
           </h6>
-          <!-- notification alert fetch           -->
 
+          <!-- notification alert fetch -->
           <div id="notification">
-            <!--   notification show   -->
             <?php
             $user = $_SESSION["user_name"];
             if ($_SESSION['user_role_id'] == 0 || $_SESSION['user_role_id'] == 2) {
 
-              $query = mysqli_query($db, "SELECT * FROM lead  WHERE sales_person = '$user' and status_now = '1' ORDER by id LIMIT 3");
-              // notification count 
+              // Check if the user is a sales person or an admin
+              if ($_SESSION['user_role_id'] == 0) {
+                // Sales Person: Get the leads for today
+                $query = mysqli_query($db, "SELECT * FROM lead WHERE sales_person = '$user' AND status_now = '1' AND DATE(date) = CURDATE() ORDER BY id LIMIT 5");
 
-              if (mysqli_num_rows($query) > 0) {
-                while ($row = mysqli_fetch_array($query)) {
+                // Show lead notifications
+                if (mysqli_num_rows($query) > 0) {
+                  while ($row = mysqli_fetch_array($query)) {
             ?>
-                  <a class="dropdown-item d-flex align-items-center" href="lead-view.php?lead=<?php echo $row['id']; ?>">
-                    <div class="mr-3">
-                      <div class="icon-circle bg-primary">
-                        <!-- php echo first name letter -->
-                        <p class="first-chr">
+                    <a class="dropdown-item d-flex align-items-center" href="lead-view.php?lead=<?php echo $row['id']; ?>">
+                      <div class="mr-3">
+                        <div class="icon-circle bg-primary">
+                          <p class="first-chr">
+                            <?php
+                            // Get the first character of the lead name
+                            $string = $row['name'];
+                            $GetfirstChar = mb_substr($string, 0, 1, "UTF-8");
+                            echo $GetfirstChar;
+                            ?>
+                          </p>
+                        </div>
+                      </div>
+                      <div>
+                        <span class="font-weight-bold"><?php echo $row['name'] . "<b style='color:red;'> For </b>" . $row['destination']; ?></span>
+                        <div class="small text-gray-500">
                           <?php
-                          //Example string.
-                          $string = $row['name'];
-                          //generate  mb_substr to the get first letter of the character.
-                          $GetfirstChar = mb_substr($string, 0, 1, "UTF-8");
-
-                          //now Print the first character.
-                          echo $GetfirstChar;
+                          $time = $row['date'];
+                          echo date('d-m-Y, g:i A', strtotime($time));
                           ?>
-                        </p>
+                        </div>
                       </div>
-                    </div>
-                    <div>
-                      <span class="font-weight-bold"><?php echo $row['name'] . "<b style='color:red;'> For </b>"   . $row['destination'];     ?></span>
-                      <!-- notifaction date -->
-                      <div class="small text-gray-500">
-                        <?php
-                        $time = $row['date'];
-                        echo date('d-m-Y, g:i A',  strtotime($time));
-                        ?>
-                      </div>
-
-
-                    </div>
-                  </a>
-                <?php
+                    </a>
+                  <?php
+                  }
+                } else {
+                  echo '<div class="alert alert-warning">No Notification Found...</div>';
                 }
               } else {
-                ?>
-                <div class="alert alert-warning">
-                  No Notification Found ...
-                </div>
+                // Admin: Get the lead notes for today
+                $query = mysqli_query($db, "SELECT * FROM lead_notes WHERE DATE(create_date) = CURDATE() ORDER BY note_id DESC LIMIT 5");
+
+                // Show lead notes notifications
+                if (mysqli_num_rows($query) > 0) {
+                  while ($row = mysqli_fetch_array($query)) {
+                  ?>
+                    <a class="dropdown-item d-flex align-items-center" href="lead-notes-view.php?note=<?php echo $row['note_id']; ?>">
+                      <div class="mr-3">
+                        <div class="icon-circle bg-warning">
+                          <p class="first-chr">
+                            <?php
+                            // Get the first character of the note description
+                            $string = $row['note'];
+                            $GetfirstChar = mb_substr($string, 0, 1, "UTF-8");
+                            echo $GetfirstChar;
+                            ?>
+                          </p>
+                        </div>
+                      </div>
+                      <div>
+                        <span class="font-weight-bold"><?php echo $row['note']; ?></span>
+                        <div class="small text-gray-500">
+                          <?php
+                          $time = $row['create_date'];
+                          echo date('d-m-Y, g:i A', strtotime($time));
+                          ?>
+                        </div>
+                      </div>
+                    </a>
             <?php
+                  }
+                } else {
+                  echo '<div class="alert alert-warning">No Notification Found...</div>';
+                }
               }
             }
-
             ?>
-
-
           </div>
           <a class="dropdown-item text-center small text-gray-500" href="index.php">Show All Alerts</a>
         </div>
       </li>
+
 
 
       <div class="topbar-divider d-none d-sm-block"></div>

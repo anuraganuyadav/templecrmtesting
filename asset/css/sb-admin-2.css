@@ -1625,13 +1625,15 @@ pre code {
 
 .table-dark {
   color: #fff;
-  background-color: #5a5c69;
+  /* background-color: #5a5c69; */
+  background-color: #bff0de;
 }
 
 .table-dark th,
 .table-dark td,
 .table-dark thead th {
-  border-color: #6c6e7e;
+  /* border-color: #6c6e7e; */
+border-color: #89e2c2;
 }
 
 .table-dark.table-bordered {

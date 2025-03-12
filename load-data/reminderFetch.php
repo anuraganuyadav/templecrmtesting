@@ -43,7 +43,8 @@
 
     while ($row = mysqli_fetch_array($query)) {
     ?>
-      <tr class="text-light">
+      <!-- <tr class="text-light"> -->
+      <tr class="">
         <td>
           <div class="rupdate" data-id="<?php echo $row["id"] ?>" data-column="note"><?php echo $row["note"] ?></div>
         </td>

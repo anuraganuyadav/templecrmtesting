@@ -11,6 +11,7 @@ if ($_SESSION['user_role_id'] == 0 && $_SESSION['user_role_id'] == 1 && $_SESSIO
 
   header("Location:index.php");
 }
+
 error_reporting(~E_NOTICE);
 require_once 'inc/config.php';
 
@@ -97,7 +98,6 @@ if ($getStatus['status'] == 0) {
     <link rel="stylesheet" type="text/css" href="asset/date-range/dist/duDatepicker.min.css">
     <link rel="stylesheet" type="text/css" href="asset/date-range/dist/duDatepicker-theme.css">
     </head>
-    <!-- "Return Back" Button to Same Page -->
 
     <body class="fixed-nav sticky-footer bg-dark" id="page-top">
       <?php include_once("layouts/sidebar.php"); ?>
@@ -210,11 +210,10 @@ if ($getStatus['status'] == 0) {
                   // $CDB_USER = 'account_crm';
                   // $CDB_PASS = 'q^Qgm8%uOH!e';
                   // $CDB_NAME = 'account_crm';
-
                   $CDB_HOST = 'localhost';
                   $CDB_USER = 'root';
                   $CDB_PASS = '';
-                  $CDB_NAME = 'templecrm';
+                  $CDB_NAME = 'account_crm';
 
                   $connAcc = mysqli_connect("$CDB_HOST", "$CDB_USER", "$CDB_PASS", "$CDB_NAME");
                   mysqli_select_db($connAcc, $CDB_NAME);
@@ -426,7 +425,6 @@ if ($getStatus['status'] == 0) {
 
                       <script>
                         $(document).ready(function() {
-
                           $("#Alarm").load("load-data/reminderFetch.php");
 
                           function update_data(id, column_name, value) {
@@ -440,19 +438,58 @@ if ($getStatus['status'] == 0) {
                               },
                               success: function(data) {
                                 $('#messageAlert').html('<div class="alert alert-success">' + data + '</div>');
+                                $("#Alarm").load("load-data/reminderFetch.php");
                               }
                             });
                             setInterval(function() {
                               $('#messageAlert').html('');
                             }, 5000);
                           }
-
                           $(document).on('blur', '.rupdate', function() {
                             var id = $(this).data("id");
                             var column_name = $(this).data("column");
-                            var value = $(this).text();
+                            var value = $(this).val();
                             update_data(id, column_name, value);
                           });
+
+
+                          // $(document).on('click', '#insert', function() {
+                          //   var DataID = $('#dataid').val();
+                          //   var name = $('#dataName').val();
+                          //   var note = $('#dataNote').val();
+                          //   var date = $('#date-format').val();
+                          //   var time = $('.time-input').val();
+                          //   var sales = $('#sales').val();
+                          //   var page = $('#page').val();
+                          //   if (name != '' && note != '' && date != '' && time != '' && DataID != '') {
+                          //     $.ajax({
+                          //       url: "inc/insert-REMINDER.php",
+                          //       method: "POST",
+                          //       data: {
+                          //         name: name,
+                          //         note: note,
+                          //         time: time,
+                          //         date: date,
+                          //         DataID: DataID,
+                          //         sales: sales,
+                          //         page: page
+                          //       },
+                          //       success: function(data) {
+                          //         $('#messageAlert').html('<div class="alert alert-success">' + data + '</div>');
+
+                          //         $("#reminder").load("reminder.php");
+                          //         //for reminder
+
+                          //         $("#Alarm").load("load-data/reminderFetch.php");
+                          //       }
+                          //     });
+                          //     setInterval(function() {
+                          //       $('#messageAlert').html('');
+                          //     }, 5000);
+                          //   } else {
+                          //     alert("Some Fields is required");
+                          //   }
+                          // });
 
 
                           $(document).on('click', '#insert', function() {
@@ -463,6 +500,23 @@ if ($getStatus['status'] == 0) {
                             var time = $('.time-input').val();
                             var sales = $('#sales').val();
                             var page = $('#page').val();
+
+                            // Check if time is between 9 AM and 9 PM
+                            var timeRegex = /^([0-1]?[0-9]|2[0-3]):([0-5][0-9])$/; // Regex to match time format "HH:MM"
+                            var timeMatch = time.match(timeRegex);
+
+                            if (timeMatch) {
+                              var hour = parseInt(timeMatch[1]);
+                              if (hour < 9 || hour > 21) {
+                                alert("Please select a time between 9 AM and 9 PM only. If there are any updates, please contact the admin to correct it.");
+                                return; // Stop further execution if time is invalid
+                              }
+                            } else {
+                              alert("Please enter a valid time.");
+                              return;
+                            }
+
+                            // Proceed with the AJAX request if all fields are valid
                             if (name != '' && note != '' && date != '' && time != '' && DataID != '') {
                               $.ajax({
                                 url: "inc/insert-REMINDER.php",
@@ -478,10 +532,8 @@ if ($getStatus['status'] == 0) {
                                 },
                                 success: function(data) {
                                   $('#messageAlert').html('<div class="alert alert-success">' + data + '</div>');
-
                                   $("#reminder").load("reminder.php");
-                                  //for reminder
-
+                                  // for reminder
                                   $("#Alarm").load("load-data/reminderFetch.php");
                                 }
                               });
@@ -489,12 +541,35 @@ if ($getStatus['status'] == 0) {
                                 $('#messageAlert').html('');
                               }, 5000);
                             } else {
-                              alert("Some Fields is required");
+                              alert("Some Fields are required");
                             }
                           });
 
+
+                          // $(document).on('click', '.delete', function() {
+                          //   var id = $(this).attr("id");
+                          //   if (confirm("Are you sure you want to remove this?")) {
+                          //     $.ajax({
+                          //       url: "inc/delete-REMINDER.php",
+                          //       method: "POST",
+                          //       data: {
+                          //         id: id
+                          //       },
+                          //       success: function(data) {
+                          //         $('#messageAlert').html('<div class="alert alert-success">' + data + '</div>');
+                          //       }
+                          //     });
+
+                          //     $(this).parents('tr').fadeOut("2000");
+                          //     setInterval(function() {
+                          //       $('#messageAlert').html('');
+                          //     }, 5000);
+                          //   }
+                          // });
+                          
                           $(document).on('click', '.delete', function() {
                             var id = $(this).attr("id");
+                            var row = $(this).parents("tr"); // Store the row element to remove later
                             if (confirm("Are you sure you want to remove this?")) {
                               $.ajax({
                                 url: "inc/delete-REMINDER.php",
@@ -502,17 +577,34 @@ if ($getStatus['status'] == 0) {
                                 data: {
                                   id: id
                                 },
-                                success: function(data) {
-                                  $('#messageAlert').html('<div class="alert alert-success">' + data + '</div>');
+                                success: function(response) {
+                                  console.log(response); // Debugging line to check the response
+
+                                  if (response == 'Data Deleted') {
+                                    // Fade out and remove the row from the UI after successful delete
+                                    row.animate({
+                                      backgroundColor: "#003"
+                                    }, "slow").animate({
+                                      opacity: "hide"
+                                    }, "slow", function() {
+                                      $(this).remove(); // Remove the row after the animation
+                                    });
+
+                                    // Optionally, refresh the data to ensure consistency
+                                    fetch_data();
+                                  } else {
+                                    $('#messageAlert').html('<div class="alert alert-danger">' + response + '</div>');
+                                  }
+                                },
+                                error: function(xhr, status, error) {
+                                  console.log("Error: " + error); // Log the error to debug
+                                  $('#messageAlert').html('<div class="alert alert-danger">Error: ' + error + '</div>');
                                 }
                               });
-
-                              $(this).parents('tr').fadeOut("2000");
-                              setInterval(function() {
-                                $('#messageAlert').html('');
-                              }, 5000);
                             }
                           });
+
+
                         });
                       </script>
                     </div>

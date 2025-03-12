@@ -240,17 +240,15 @@ if ($getStatus['status'] == 0) {
             <div class="row">
               <!--notes-->
               <div class="col-sm-7">
-                <div class="card shadow">
 
+                <div class="card shadow">
                   <div class="card-header-note d-block">
                     <form id="cmdline">
                       <div class="input-group">
                         <input autocomplete="off" type="text" id="noteTEXT" placeholder="Type notes..." class="p-2 w-100 m-2" name="note">
                       </div>
                       <button class="send btn-success btn-add button-not hide" id="NoteAdd" type="submit">Add</button>
-
                     </form>
-
                   </div>
                   <!-- Card note history -->
                   <div class="collapse show" id="ViewNotes">
@@ -262,6 +260,7 @@ if ($getStatus['status'] == 0) {
                     </div>
                   </div>
                 </div>
+
                 <div class="card text-white bg-reminder mb-3 mt-4">
                   <div class="card-header bg-primary">Add Reminder</div>
                   <div class="card-body">
@@ -517,6 +516,43 @@ if ($getStatus['status'] == 0) {
               update_data(id, column_name, value);
             });
 
+            // $(document).on('click', '#insert', function() {
+            //   var DataID = $('#dataid').val();
+            //   var name = $('#dataName').val();
+            //   var note = $('#dataNote').val();
+            //   var date = $('#date-format').val();
+            //   var time = $('.time-input').val();
+            //   var sales = $('#sales').val();
+            //   var page = $('#page').val();
+            //   if (name != '' && note != '' && date != '' && time != '' && DataID != '') {
+            //     $.ajax({
+            //       url: "inc/insert-REMINDER.php",
+            //       method: "POST",
+            //       data: {
+            //         name: name,
+            //         note: note,
+            //         time: time,
+            //         date: date,
+            //         DataID: DataID,
+            //         sales: sales,
+            //         page: page
+            //       },
+            //       success: function(data) {
+            //         $('#messageAlert').html('<div class="alert alert-success">' + data + '</div>');
+
+            //         $("#reminder").load("reminder.php");
+            //         //for reminder
+            //         $("#Alarm").load("load-data/reminderFetch.php");
+            //       }
+            //     });
+            //     setInterval(function() {
+            //       $('#messageAlert').html('');
+            //     }, 5000);
+            //   } else {
+            //     alert("Some Fields is required");
+            //   }
+            // });
+
             $(document).on('click', '#insert', function() {
               var DataID = $('#dataid').val();
               var name = $('#dataName').val();
@@ -525,6 +561,23 @@ if ($getStatus['status'] == 0) {
               var time = $('.time-input').val();
               var sales = $('#sales').val();
               var page = $('#page').val();
+
+              // Check if time is between 9 AM and 9 PM
+              var timeRegex = /^([0-1]?[0-9]|2[0-3]):([0-5][0-9])$/; // Regex to match time format "HH:MM"
+              var timeMatch = time.match(timeRegex);
+
+              if (timeMatch) {
+                var hour = parseInt(timeMatch[1]);
+                if (hour < 9 || hour > 21) {
+                  alert("Please select a time between 9 AM and 9 PM only. If there are any updates, please contact the admin to correct it.");
+                  return; // Stop further execution if time is invalid
+                }
+              } else {
+                alert("Please enter a valid time.");
+                return;
+              }
+
+              // Proceed with the AJAX request if all fields are valid
               if (name != '' && note != '' && date != '' && time != '' && DataID != '') {
                 $.ajax({
                   url: "inc/insert-REMINDER.php",
@@ -540,9 +593,8 @@ if ($getStatus['status'] == 0) {
                   },
                   success: function(data) {
                     $('#messageAlert').html('<div class="alert alert-success">' + data + '</div>');
-
                     $("#reminder").load("reminder.php");
-                    //for reminder
+                    // for reminder
                     $("#Alarm").load("load-data/reminderFetch.php");
                   }
                 });
@@ -550,9 +602,10 @@ if ($getStatus['status'] == 0) {
                   $('#messageAlert').html('');
                 }, 5000);
               } else {
-                alert("Some Fields is required");
+                alert("Some Fields are required");
               }
             });
+
             // $(document).on('click', '#insert', function() {
             //   var DataID = $('#dataid').val();
             //   var name = $('#dataName').val();
