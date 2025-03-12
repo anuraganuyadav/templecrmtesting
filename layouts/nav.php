@@ -245,7 +245,7 @@
           </h6>
 
           <!-- notification alert fetch -->
-          <div id="notification">
+          <div id="notification" style="max-height: 300px; overflow-y: auto;">
             <?php
             $user = $_SESSION["user_name"];
             if ($_SESSION['user_role_id'] == 0 || $_SESSION['user_role_id'] == 2) {
@@ -289,13 +289,19 @@
                 }
               } else {
                 // Admin: Get the lead notes for today
-                $query = mysqli_query($db, "SELECT * FROM lead_notes WHERE DATE(create_date) = CURDATE() ORDER BY note_id DESC LIMIT 5");
+                $query = mysqli_query($db, "SELECT * FROM lead_notes WHERE DATE(create_date) = CURDATE() ORDER BY note_id DESC ");
 
                 // Show lead notes notifications
                 if (mysqli_num_rows($query) > 0) {
                   while ($row = mysqli_fetch_array($query)) {
                   ?>
-                    <a class="dropdown-item d-flex align-items-center" href="lead-notes-view.php?note=<?php echo $row['note_id']; ?>">
+                    <a class="dropdown-item d-flex align-items-center" href="<?php
+                                                                              if ($row['page'] == "potential") {
+                                                                                echo "Potential-view.php?view_potential=" . $row['reminderID'];
+                                                                              } else if ($row['page'] == "lead") {
+                                                                                echo "lead-view.php?lead=" . $row['reminderID'];
+                                                                              } else {
+                                                                              } ?>">
                       <div class="mr-3">
                         <div class="icon-circle bg-warning">
                           <p class="first-chr">
