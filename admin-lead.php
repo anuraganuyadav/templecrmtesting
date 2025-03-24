@@ -317,10 +317,15 @@ if ($getStatus['status'] == 0) {
                                              </div>
 
                                         </div>
+
                                    </div>
+
                               </form>
+
                          </div>
+
                     </div>
+
                </div>
 
           </div>
@@ -367,7 +372,9 @@ if ($getStatus['status'] == 0) {
                                                        <span class="badge badge-danger">
 
                                                             Enter Your Name
+
                                                        </span>
+
                                                   </div>
 
                                              </div>
@@ -420,6 +427,7 @@ if ($getStatus['status'] == 0) {
 
                                                                  <?php echo $row['destinations_list']; ?></option>
 
+
                                                        <?php
 
                                                        }
@@ -427,6 +435,17 @@ if ($getStatus['status'] == 0) {
                                                        ?>
 
                                                   </select>
+                                                  <!--
+                                                  <div class="invalid-feedback">
+
+                                                       <span class="badge badge-danger">
+
+                                                       Select Destination
+
+                                                       </span>
+
+                                                 </div>
+                                                 -->
 
                                              </div>
 
@@ -476,7 +495,11 @@ if ($getStatus['status'] == 0) {
 
                                                        $query_list = mysqli_query($conn, "SELECT * FROM users WHERE (user_role_id ='$salse' || user_role_id ='$both') ORDER by user_name ASC");
 
-                                                       while ($row = mysqli_fetch_array($query_list)) { ?><option value="<?php echo $row['user_name']; ?>"><?php echo $row['user_name']; ?></option> <?php } ?>
+                                                       while ($row = mysqli_fetch_array($query_list)) { ?><option value="<?php echo $row['user_name']; ?>"><?php echo $row['user_name']; ?></option> <?php
+
+                                                                                                                                                                }
+
+                                                                                                                                                                     ?>
 
                                                   </select>
 
@@ -541,6 +564,36 @@ if ($getStatus['status'] == 0) {
                });
           </script>
 
+          <!-- <script>
+      $(document).ready(function() {
+        $('#Loading').hide();
+
+        $("#data3").keyup(function() {
+          // Check if the first character is '0'
+          if ($('#data3').val().charAt(0) === '0') {
+            $('#NumberResult').text('Mobile number cannot start with 0').css('color', 'yellow').fadeIn();
+            $('#Loading').hide(); // Hide loading indicator
+            return false; // Prevent further action
+          } else {
+            // Clear the error message once the '0' is removed
+            $('#NumberResult').fadeOut();
+
+            // Proceed with AJAX only if the length is greater than 8
+            if ($('#data3').val().length > 8) {
+              $('#Loading').show();
+              $.post("inc/Lead-validation.php", {
+                Monumber: $('#data3').val()
+              }, function(response) {
+                $('#Loading').fadeOut();
+                $('#NumberResult').fadeOut();
+                setTimeout("finishAjax('NumberResult', '" + escape(response) + "')", 400);
+              });
+            }
+          }
+        });
+      });
+    </script> -->
+
           <script>
                $(document).ready(function() {
 
@@ -588,6 +641,16 @@ if ($getStatus['status'] == 0) {
 
                     }
 
+
+
+                    //   $.fn.dataTable.ext.errMode = function ( settings, helpPage, message ) { 
+
+                    //       console.log(message);
+
+                    //       };
+
+
+
                     function update_data(id, column_name, value) {
 
                          $.ajax({
@@ -614,6 +677,10 @@ if ($getStatus['status'] == 0) {
 
                                         data + '</div>');
 
+                                   // $('#fetchTable').DataTable().destroy();
+
+                                   // fetch_data();
+
                               }
 
                          });
@@ -625,6 +692,8 @@ if ($getStatus['status'] == 0) {
                          }, 50000);
 
                     }
+
+
 
                     $(document).on('change', '.update', function() {
 
@@ -638,9 +707,13 @@ if ($getStatus['status'] == 0) {
 
                     });
 
+
+
                     $('#form').submit(function(e) {
 
                          e.preventDefault();
+
+
 
                          var name = $('#data1').val();
 
@@ -699,6 +772,9 @@ if ($getStatus['status'] == 0) {
                                         $('#fetchTable').DataTable().destroy();
 
                                         fetch_data();
+
+
+
                                    }
 
                               });
@@ -722,6 +798,65 @@ if ($getStatus['status'] == 0) {
                          $('.needs-validation').removeClass('was-validated');
 
                     });
+
+                    // $('#form').submit(function(e) {
+                    //   e.preventDefault(); // Prevent the form from submitting
+
+                    //   var name = $('#data1').val();
+                    //   var email = $('#data2').val();
+                    //   var mo_number = $('#data3').val();
+                    //   var destination = $('#data4').val();
+                    //   var description = $('#data5').val();
+                    //   var no_person = $('#data6').val();
+                    //   var LeadSource = $('#data7').val();
+                    //   var sales_person = $('#data9').val();
+
+                    //   // Check if the mobile number starts with zero
+                    //   if (mo_number.charAt(0) === '0') {
+                    //     $('#NumberResult').text('Mobile number cannot start with 0').css('color', 'yellow').fadeIn();
+                    //     return false; // Prevent further action (form submission)
+                    //   } else {
+                    //     // Clear the error message if the '0' is removed
+                    //     $('#NumberResult').fadeOut();
+                    //   }
+
+                    //   // Check if required fields are filled
+                    //   if (name != '' && destination != '' && LeadSource != '' && sales_person != '') {
+                    //     $.ajax({
+                    //       url: "inc/insert.php",
+                    //       method: "POST",
+                    //       data: {
+                    //         name: name,
+                    //         email: email,
+                    //         mo_number: mo_number,
+                    //         destination: destination,
+                    //         description: description,
+                    //         no_person: no_person,
+                    //         LeadSource: LeadSource,
+                    //         sales_person: sales_person
+                    //       },
+                    //       success: function(data) {
+                    //         $('#insertert_message').html(
+                    //           '<div class="alert alert-size alert-success">' +
+                    //           data + '</div>'
+                    //         );
+                    //         $('#fetchTable').DataTable().destroy();
+                    //         fetch_data();
+                    //       }
+                    //     });
+
+                    //     setInterval(function() {
+                    //       $('#insertert_message').html('');
+                    //     }, 5000);
+                    //   } else {
+                    //     return false; // If any required field is empty, don't submit
+                    //   }
+
+                    //   // Clear input fields after successful submission
+                    //   $(this).closest('form').find("input[type=text], textarea, select").val("");
+                    //   $('.needs-validation').removeClass('was-validated');
+                    // });
+
 
                     $(document).on('click', '.delete', function() {
 
@@ -762,11 +897,16 @@ if ($getStatus['status'] == 0) {
                                    $('#alert_message').html('');
 
                               }, 5000);
+
                          }
+
                     });
 
                });
           </script>
+
+
+
      <?php
 
      include_once("layouts/footer.php");

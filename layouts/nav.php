@@ -124,7 +124,7 @@
         </a>
 
         <!-- Dropdown - reminder -->
-        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="reminderDropdown">
+        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
           <h6 class="dropdown-header">
             Reminder Center
           </h6>
@@ -226,34 +226,46 @@
               if ($_SESSION['user_role_id'] == 0) {
                 // Sales Person: Get the leads for today
                 $query = mysqli_query($db, "SELECT * FROM lead WHERE sales_person = '$user' AND status_now = '1' AND DATE(date) = CURDATE()");
+                // Count the results for sales person
+                $total_notifications = mysqli_num_rows($query);
               } else {
                 // Admin: Get the lead notes for today
-                $query = mysqli_query($db, "SELECT * FROM lead_notes WHERE DATE(create_date) = CURDATE()");
+                $query1 = mysqli_query($db, "SELECT * FROM lead_notes WHERE DATE(create_date) = CURDATE()");
+                $query2 = mysqli_query($db, "SELECT * FROM potential_notes WHERE DATE(create_date) = CURDATE()");
+
+                // Count the results for both queries
+                $total_notifications = 0;
+                if ($query1) {
+                  $total_notifications += mysqli_num_rows($query1);
+                }
+                if ($query2) {
+                  $total_notifications += mysqli_num_rows($query2);
+                }
               }
 
-              echo mysqli_num_rows($query);
+              echo $total_notifications;
             }
             ?>
           </span>
         </a>
 
         <!-- notification Alerts -->
-        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
+        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" style="max-height: 300px; overflow-y: auto;">
           <!-- Dropdown - Alerts -->
           <h6 class="dropdown-header">
             Alerts Center
           </h6>
 
           <!-- notification alert fetch -->
-          <div id="notification" style="max-height: 300px; overflow-y: auto;">
+          <div id="notification">
             <?php
             $user = $_SESSION["user_name"];
             if ($_SESSION['user_role_id'] == 0 || $_SESSION['user_role_id'] == 2) {
 
-              // Check if the user is a sales person or an admin
+              // Sales Person: Fetch leads for today
               if ($_SESSION['user_role_id'] == 0) {
                 // Sales Person: Get the leads for today
-                $query = mysqli_query($db, "SELECT * FROM lead WHERE sales_person = '$user' AND status_now = '1' AND DATE(date) = CURDATE() ORDER BY id LIMIT 5");
+                $query = mysqli_query($db, "SELECT * FROM lead WHERE sales_person = '$user' AND status_now = '1' AND DATE(date) = CURDATE() ORDER BY id Desc");
 
                 // Show lead notifications
                 if (mysqli_num_rows($query) > 0) {
@@ -289,25 +301,34 @@
                 }
               } else {
                 // Admin: Get the lead notes for today
-                $query = mysqli_query($db, "SELECT * FROM lead_notes WHERE DATE(create_date) = CURDATE() ORDER BY note_id DESC ");
+                // Admin: Fetch lead notes and potential notes for today
+                $query1 = mysqli_query($db, "SELECT * FROM lead_notes WHERE DATE(create_date) = CURDATE() ORDER BY note_id DESC");
+                $query2 = mysqli_query($db, "SELECT * FROM potential_notes WHERE DATE(create_date) = CURDATE() ORDER BY note_id DESC");
+
+                // Combine both results
+                $combined_query = [];
+                if ($query1) {
+                  while ($row = mysqli_fetch_array($query1)) {
+                    $combined_query[] = $row;
+                  }
+                }
+                if ($query2) {
+                  while ($row = mysqli_fetch_array($query2)) {
+                    $combined_query[] = $row;
+                  }
+                }
 
                 // Show lead notes notifications
-                if (mysqli_num_rows($query) > 0) {
-                  while ($row = mysqli_fetch_array($query)) {
-                  ?>
-                    <a class="dropdown-item d-flex align-items-center" href="<?php
-                                                                              if ($row['page'] == "potential") {
-                                                                                echo "Potential-view.php?view_potential=" . $row['reminderID'];
-                                                                              } else if ($row['page'] == "lead") {
-                                                                                echo "lead-view.php?lead=" . $row['reminderID'];
-                                                                              } else {
-                                                                              } ?>">
+                if (count($combined_query) > 0) {
+                  foreach ($combined_query as $row) { ?>
+                    <a class="dropdown-item d-flex align-items-center" href="potential-view.php?view_potential=<?php echo $row['note_id']; ?>">
+                      <!-- <a class="dropdown-item d-flex align-items-center" href="lead-view.php?lead=<?php echo $row['note_id']; ?>"> -->
                       <div class="mr-3">
                         <div class="icon-circle bg-warning">
                           <p class="first-chr">
                             <?php
                             // Get the first character of the note description
-                            $string = $row['note'];
+                            $string = isset($row['note']) ? $row['note'] : '';
                             $GetfirstChar = mb_substr($string, 0, 1, "UTF-8");
                             echo $GetfirstChar;
                             ?>
@@ -315,7 +336,7 @@
                         </div>
                       </div>
                       <div>
-                        <span class="font-weight-bold"><?php echo $row['note']; ?></span>
+                        <span class="font-weight-bold"><?php echo isset($row['note']) ? $row['note'] : 'Potential Note'; ?></span>
                         <div class="small text-gray-500">
                           <?php
                           $time = $row['create_date'];
@@ -324,8 +345,7 @@
                         </div>
                       </div>
                     </a>
-            <?php
-                  }
+            <?php }
                 } else {
                   echo '<div class="alert alert-warning">No Notification Found...</div>';
                 }
@@ -336,8 +356,6 @@
           <a class="dropdown-item text-center small text-gray-500" href="index.php">Show All Alerts</a>
         </div>
       </li>
-
-
 
       <div class="topbar-divider d-none d-sm-block"></div>
 

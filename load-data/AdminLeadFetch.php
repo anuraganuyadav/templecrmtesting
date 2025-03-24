@@ -95,7 +95,11 @@ while ($row = mysqli_fetch_array($result)) {
 	$sub_array[] = '<input class="update" data-id="' . $row["id"] . '" data-column="email" value="' . htmlentities($row["email"]) . '">';
 
 	// Mobile number with duplicate and common check
-	$sub_array[] = '<input class="update mo-responsive" data-id="' . $row["id"] . '" data-column="mo_number" value="' . htmlentities($row["mo_number"]) . '" ' . $mo_number_style . '>';
+	// $sub_array[] = '<input class="update mo-responsive" data-id="' . $row["id"] . '" data-column="mo_number" value="' . htmlentities($row["mo_number"]) . '" ' . $mo_number_style . '>';
+	// Mobile number with duplicate and common check
+	$mo_number_display = ltrim($row["mo_number"], '0'); // Strip leading zero
+	$sub_array[] = '<input class="update mo-responsive" data-id="' . $row["id"] . '" data-column="mo_number" value="' . htmlentities($mo_number_display) . '" ' . $mo_number_style . '>';
+
 
 	// Destination
 	$sub_array[] = '<input class="update" data-id="' . $row["id"] . '" data-column="destination" value="' . htmlentities($row["destination"]) . '">';
