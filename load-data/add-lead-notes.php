@@ -8,21 +8,25 @@ if (!isset($_SESSION['userID'], $_SESSION['user_role_id'])) {
 //identyfied
 if ($_SESSION['user_role_id'] == 0 || $_SESSION['user_role_id'] == 1 || $_SESSION['user_role_id'] == 2) {
 
-
   $id = $_SESSION['clid'];
-
-
-
 
   if (isset($_POST["note"]) && strlen($_POST["note"]) > 1) {
     $contentToSave = $_POST["note"];
     $id = $_POST["id"];
+    //add by anurag new code
+    $timestamp = date("Y-m-d H:i:s");
 
+    // mysqli_query($conn, "UPDATE lead SET last_activity = '$timestamp' , status_now = '0' WHERE id= $id");
+    mysqli_query($conn, "UPDATE lead SET last_activity = '$timestamp' WHERE id = '$id'");
 
-    mysqli_query($conn, "UPDATE lead SET last_activity = '$timestamp' , status_now = '0' WHERE id= $id");
+    // Check if admin is adding the note
+    // $addedByAdmin = ($_SESSION['user_role_id'] == 1 || $_SESSION['user_role_id'] == 2) ? '(by admin)' : '';
+    $addedByAdmin = ($_SESSION['user_role_id'] == 1 || $_SESSION['user_role_id'] == 2) ? '<span class="by-admin">Admin</span>' : '';
 
-    if (mysqli_query($conn, "INSERT INTO lead_notes
-     (note, note_id, create_date) VALUES('$contentToSave', '$id', '$timestamp')")) {
+    // if (mysqli_query($conn, "INSERT INTO lead_notes
+    //  (note, note_id, create_date) VALUES('$contentToSave', '$id', '$timestamp')")) {
+    // }
+    if (mysqli_query($conn, "INSERT INTO lead_notes (note, note_id, create_date) VALUES('$contentToSave $addedByAdmin', '$id', '$timestamp')")) {
     }
   }
 ?>

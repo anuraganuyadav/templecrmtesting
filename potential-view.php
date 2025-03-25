@@ -97,6 +97,8 @@ if ($getStatus['status'] == 0) {
     <!-- Date-time picker css -->
     <link rel="stylesheet" type="text/css" href="asset/date-range/dist/duDatepicker.min.css">
     <link rel="stylesheet" type="text/css" href="asset/date-range/dist/duDatepicker-theme.css">
+
+
     </head>
 
     <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -566,7 +568,7 @@ if ($getStatus['status'] == 0) {
                           //     }, 5000);
                           //   }
                           // });
-                          
+
                           $(document).on('click', '.delete', function() {
                             var id = $(this).attr("id");
                             var row = $(this).parents("tr"); // Store the row element to remove later

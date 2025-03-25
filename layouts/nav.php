@@ -110,7 +110,7 @@
             $timestamp = date('Y-m-d H:i:s');
 
             // Admin will see all reminders, others will see only their own
-            if ($_SESSION['user_role_id'] == 2) {
+            if ($_SESSION['user_role_id'] == 2 || $_SESSION['user_role_id'] == 1) {
               // Admin: Show all reminders where the remark is empty and the reminder date is in the past or present
               $res = mysqli_query($db, "SELECT * FROM reminder WHERE remark = '' AND reminder_date <= '$timestamp'");
             } else {
@@ -133,7 +133,7 @@
             <!-- Notification show -->
             <?php
             // Admin: show all reminders, others: show only their own
-            if ($_SESSION['user_role_id'] == 2) {
+            if ($_SESSION['user_role_id'] == 2 || $_SESSION['user_role_id'] == 1) {
               $query = mysqli_query($db, "SELECT * FROM reminder WHERE remark = '' AND reminder_date <= '$timestamp' ORDER BY id");
             } else {
               $query = mysqli_query($db, "SELECT * FROM reminder WHERE remark = '' AND sales_person = '" . $_SESSION['user_name'] . "' AND reminder_date <= '$timestamp' ORDER BY id");
@@ -219,9 +219,14 @@
           <!-- Counter - Alerts -->
           <span id="notificationCount" class="badge badge-danger badge-counter">
             <?php
-            $user = $_SESSION["user_name"];
-            if ($_SESSION['user_role_id'] == 0 || $_SESSION['user_role_id'] == 2) {
+            // Set the time zone to Asia/Kolkata
+            date_default_timezone_set('Asia/Kolkata');
+            $timestamp = date('Y-m-d H:i:s'); // current timestamp in Asia/Kolkata timezone
 
+            $user = $_SESSION["user_name"];
+            $total_notifications = 0;
+
+            if ($_SESSION['user_role_id'] == 0 || $_SESSION['user_role_id'] == 2 || $_SESSION['user_role_id'] == 1) {
               // Check if the user is a sales person or an admin
               if ($_SESSION['user_role_id'] == 0) {
                 // Sales Person: Get the leads for today
@@ -230,21 +235,20 @@
                 $total_notifications = mysqli_num_rows($query);
               } else {
                 // Admin: Get the lead notes for today
-                $query1 = mysqli_query($db, "SELECT * FROM lead_notes WHERE DATE(create_date) = CURDATE()");
-                $query2 = mysqli_query($db, "SELECT * FROM potential_notes WHERE DATE(create_date) = CURDATE()");
+                $querynote = mysqli_query($db, "SELECT * FROM lead_notes WHERE DATE(create_date) = CURDATE()");
+                $querypotential = mysqli_query($db, "SELECT * FROM potential_notes WHERE DATE(create_date) = CURDATE()");
 
                 // Count the results for both queries
-                $total_notifications = 0;
-                if ($query1) {
-                  $total_notifications += mysqli_num_rows($query1);
+                if ($querynote) {
+                  $total_notifications += mysqli_num_rows($querynote);
                 }
-                if ($query2) {
-                  $total_notifications += mysqli_num_rows($query2);
+                if ($querypotential) {
+                  $total_notifications += mysqli_num_rows($querypotential);
                 }
               }
-
-              echo $total_notifications;
             }
+
+            echo $total_notifications;
             ?>
           </span>
         </a>
@@ -260,12 +264,11 @@
           <div id="notification">
             <?php
             $user = $_SESSION["user_name"];
-            if ($_SESSION['user_role_id'] == 0 || $_SESSION['user_role_id'] == 2) {
-
+            if ($_SESSION['user_role_id'] == 0 || $_SESSION['user_role_id'] == 2 || $_SESSION['user_role_id'] == 1) {
               // Sales Person: Fetch leads for today
               if ($_SESSION['user_role_id'] == 0) {
                 // Sales Person: Get the leads for today
-                $query = mysqli_query($db, "SELECT * FROM lead WHERE sales_person = '$user' AND status_now = '1' AND DATE(date) = CURDATE() ORDER BY id Desc");
+                $query = mysqli_query($db, "SELECT * FROM lead WHERE sales_person = '$user' AND status_now = '1' AND DATE(date) = CURDATE() ORDER BY id DESC");
 
                 // Show lead notifications
                 if (mysqli_num_rows($query) > 0) {
@@ -302,18 +305,20 @@
               } else {
                 // Admin: Get the lead notes for today
                 // Admin: Fetch lead notes and potential notes for today
-                $query1 = mysqli_query($db, "SELECT * FROM lead_notes WHERE DATE(create_date) = CURDATE() ORDER BY note_id DESC");
-                $query2 = mysqli_query($db, "SELECT * FROM potential_notes WHERE DATE(create_date) = CURDATE() ORDER BY note_id DESC");
+                $querynote = mysqli_query($db, "SELECT * FROM lead_notes WHERE DATE(create_date) = CURDATE() ORDER BY note_id DESC");
+                $querypotential = mysqli_query($db, "SELECT * FROM potential_notes WHERE DATE(create_date) = CURDATE() ORDER BY note_id DESC");
 
                 // Combine both results
                 $combined_query = [];
-                if ($query1) {
-                  while ($row = mysqli_fetch_array($query1)) {
+                if ($querynote) {
+                  while ($row = mysqli_fetch_array($querynote)) {
+                    $row['type'] = 'lead'; // Add a type flag to distinguish lead notes
                     $combined_query[] = $row;
                   }
                 }
-                if ($query2) {
-                  while ($row = mysqli_fetch_array($query2)) {
+                if ($querypotential) {
+                  while ($row = mysqli_fetch_array($querypotential)) {
+                    $row['type'] = 'potential'; // Add a type flag to distinguish potential notes
                     $combined_query[] = $row;
                   }
                 }
@@ -321,8 +326,13 @@
                 // Show lead notes notifications
                 if (count($combined_query) > 0) {
                   foreach ($combined_query as $row) { ?>
-                    <a class="dropdown-item d-flex align-items-center" href="potential-view.php?view_potential=<?php echo $row['note_id']; ?>">
-                      <!-- <a class="dropdown-item d-flex align-items-center" href="lead-view.php?lead=<?php echo $row['note_id']; ?>"> -->
+                    <a class="dropdown-item d-flex align-items-center" href="<?php
+                                                                              if ($row['type'] == "potential") {
+                                                                                echo "Potential-view.php?view_potential=" . $row['note_id']; // Link to potential notes
+                                                                              } else if ($row['type'] == "lead") {
+                                                                                echo "lead-view.php?lead=" . $row['note_id']; // Link to lead notes
+                                                                              }
+                                                                              ?>">
                       <div class="mr-3">
                         <div class="icon-circle bg-warning">
                           <p class="first-chr">
@@ -356,7 +366,6 @@
           <a class="dropdown-item text-center small text-gray-500" href="index.php">Show All Alerts</a>
         </div>
       </li>
-
       <div class="topbar-divider d-none d-sm-block"></div>
 
       <!-- Nav Item - User Information -->
