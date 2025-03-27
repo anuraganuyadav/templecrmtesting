@@ -226,6 +226,7 @@ svg {
 
 table {
   border-collapse: collapse;
+  font-size: 14px;
 }
 
 caption {
@@ -12278,7 +12279,8 @@ body.sidebar-toggled footer.sticky-footer {
 /* add by anurag */
 .by-admin {
   color: black;
-  font-size: 15px;
+  font-size: 12px;
   float: right;
   padding: 7px;
 }
+

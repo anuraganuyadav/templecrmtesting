@@ -208,10 +208,7 @@ if ($getStatus['status'] == 0) {
                 </select>
                 <div class="addInAccount text-right mt-5">
                   <?php
-                  // $CDB_HOST = 'localhost';
-                  // $CDB_USER = 'account_crm';
-                  // $CDB_PASS = 'q^Qgm8%uOH!e';
-                  // $CDB_NAME = 'account_crm';
+
                   $CDB_HOST = 'localhost';
                   $CDB_USER = 'root';
                   $CDB_PASS = '';
@@ -251,6 +248,28 @@ if ($getStatus['status'] == 0) {
                   <input type="number" class="update form-control wtp_no" data-id="<?php echo $id; ?>" data-column="wtp_no" value="<?php echo $wtp_no; ?>">
                 </div>
               </div>
+
+              <!-- add by anurag new function -->
+              <?php
+              if ($_SESSION['user_role_id'] == 1 || $_SESSION['user_role_id'] == 2) {
+              ?>
+                <div class="col-sm-4">
+                  <h6 class="mt-1">Source Page</h6>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="LeadSource"> </span>
+                    </div>
+                    <!-- Use the correct value and make sure it only appears for users with role 1 or 2 -->
+                    <input type="text" class="update form-control LeadSource" data-id="<?php echo $id; ?>" data-column="LeadSource" value="<?php echo htmlspecialchars($LeadSource ?? ''); ?>">
+                  </div>
+                </div>
+              <?php
+              } // End of the user role check
+              ?>
+
+              <!-- add by anurag new function end-->
+
+
               <?php
               if ($_SESSION['user_role_id'] == 1 || $_SESSION['user_role_id'] == 2) {
               ?>

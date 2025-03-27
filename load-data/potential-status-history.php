@@ -16,10 +16,24 @@ if ($_SESSION['user_role_id'] == 0 || $_SESSION['user_role_id'] == 1 || $_SESSIO
 ?>
     <!--tabale row-->
     <tr>
-      <td> <?php echo $row['status_detail']; ?></td>
+      <!-- <td> <?php echo $row['status_detail']; ?></td> -->
+      <td>
+        <?php
+        $comment = $row['status_detail'];
+        $isEditedByAdmin = false;
+        if (stripos($comment, 'admin') !== false) {
+          $isEditedByAdmin = true;
+          $comment = substr(trim($comment), 0, -10);
+        }
+        ?>
+        <span style="display:flex;justify-content: space-between">
+          <span><?php echo $comment; ?></span>
+          <span style="font-size: 12px"><?php echo ($isEditedByAdmin ? "(Admin)" : '') ?></span>
+        </span>
+      </td>
       <td class="text-center"> <?php
                                 $time = $row['status_date'];
-                                echo  date('d M Y, g;i A', strtotime($time));
+                                echo  date('d M Y, g:i A', strtotime($time));
                                 //type1  echo  date('g:i A, l - d M Y', strtotime($time));
                                 //type2 echo  date("m-d-Y", strtotime($time)); 
                                 ?></td>

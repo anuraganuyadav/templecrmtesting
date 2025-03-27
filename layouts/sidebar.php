@@ -148,7 +148,12 @@ if ($_SESSION['user_role_id'] == 1) {
           <span> Go To Accounts</span></a>
       </li>
 
-
+      <!-- All  Activity -->
+      <li class="nav-item">
+        <a class="nav-link" href="contacts.php">
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>Contact</span></a>
+      </li>
 
 
       <!-- Divider -->
@@ -397,6 +402,9 @@ if ($_SESSION['user_role_id'] == 1) {
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span> Go To Accounts</span></a>
             </li>
+
+
+
 
 
             <hr class="sidebar-divider my-0">

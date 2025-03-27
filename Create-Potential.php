@@ -73,6 +73,18 @@ if ($getStatus['status'] == 0) {
                   <input class="form-control form-control-user-style1" type="text" id="name" name="name" value="<?php echo $name; ?>" placeholder="Name" required>
                 </div>
               </div>
+
+              <!-- source lead -->
+
+              <!-- <div class="col-sm-6">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text fa-ic"><i class="fas fa-male"></i></span>
+                  </div>
+                  <input class="form-control form-control-user-style1" type="text" id="LeadSource" name="LeadSource" value="<?php echo $LeadSource; ?>" placeholder="LeadSource">
+                </div>
+              </div> -->
+
               <!-- email-->
               <div class="col-sm-6">
                 <div class="input-group mb-3">
@@ -172,6 +184,9 @@ if ($getStatus['status'] == 0) {
               <input type="hidden" value="<?php echo $wtp_no; ?>" id="wtp_no" name="wtp_no">
               <input type="hidden" value="<?php echo $id; ?>" id="proposal_id" name="proposal_id">
 
+              <!-- add by anurag -->
+              <input type="hidden" value="<?php echo $LeadSource; ?>" id="LeadSource" name="LeadSource">
+
 
 
               <button class="submit btn btn-success btn-icon-split move_value" type="submit" name="move_perposal">
@@ -222,7 +237,7 @@ if ($getStatus['status'] == 0) {
           });
 
           $(document).on('click', '.submit', function() {
-
+            var LeadSource = $("#LeadSource").val();
             var name = $("#name").val();
             var email = $("#email").val();
             var mo_number = $("#mo_number").val();
@@ -241,6 +256,7 @@ if ($getStatus['status'] == 0) {
                 type: "POST",
                 url: "inc/move-perposal.php",
                 data: {
+                  LeadSource: LeadSource,
                   name: name,
                   email: email,
                   mo_number: mo_number,
@@ -297,25 +313,25 @@ if ($getStatus['status'] == 0) {
     include_once("layouts/footer.php");
   } else {
     ?>
-    <script>
-      <?php
-      if ($_SESSION['user_role_id'] == 2) {
-      ?>
+      <script>
+        <?php
+        if ($_SESSION['user_role_id'] == 2) {
+        ?>
 
-        window.location.href = "Potential.php";
-      <?php
-      } else if ($_SESSION['user_role_id'] == 1) {
-      ?>
-        window.location.href = "Admin-Potential.php";
-      <?php
-      } else if ($_SESSION['user_role_id'] == 0) {
-      ?>
-        window.location.href = "Potential.php";
-      <?php
-      } else {
-        header("Location:index.php");
-      }
-      ?>
+          window.location.href = "Potential.php";
+        <?php
+        } else if ($_SESSION['user_role_id'] == 1) {
+        ?>
+          window.location.href = "Admin-Potential.php";
+        <?php
+        } else if ($_SESSION['user_role_id'] == 0) {
+        ?>
+          window.location.href = "Potential.php";
+        <?php
+        } else {
+          header("Location:index.php");
+        }
+        ?>
       </script>
   <?php
   }
