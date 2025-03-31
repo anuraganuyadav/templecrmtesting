@@ -6,39 +6,6 @@ require_once 'inc/session.php';
 // For deleted
 include "inc/config.php";
 
-// Prepare SQL query to join the lead and potential tables based on mobile number
-$sql = "
-    SELECT 
-        l.id, 
-        l.name, 
-        l.email, 
-        l.mo_number, 
-        COALESCE(p.wtp_no, l.wtp_no) AS wtp_no,  -- Use potential's WhatsApp number if available
-        l.destination
-    FROM lead l
-    LEFT JOIN potential p ON l.mo_number = p.mo_number  -- Join by mobile number
-    
-    UNION
-    SELECT 
-        p.id, 
-        p.name, 
-        p.email, 
-        p.mo_number, 
-        p.wtp_no, 
-        p.destination
-    FROM potential p
-   
-";
-
-// Execute the query
-$result = mysqli_query($conn, $sql);
-
-// Store the data in an array
-$data = [];
-while ($row = mysqli_fetch_assoc($result)) {
-	$data[] = $row;
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -50,14 +17,18 @@ while ($row = mysqli_fetch_assoc($result)) {
 	<!-- Datatable CSS -->
 	<link href='asset/DataTables/datatables.min.css' rel='stylesheet' type='text/css'>
 	<!-- Datatable JS -->
-	<script src="asset/DataTables/datatables.min.js"></script>
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+
+	<!-- <script src="asset/DataTables/datatables.min.js"></script> -->
 </head>
 
 <body id="page-top">
 	<?php include_once("layouts/sidebar.php"); ?>
+
 	<!-- Content Wrapper -->
 	<div id="content-wrapper" class="d-flex flex-column">
 		<?php include_once("layouts/nav.php"); ?>
+
 		<!-- Begin Page Content -->
 		<div class="container-fluid p-0">
 			<!-- Back button -->
@@ -65,7 +36,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 			<br>
 
 			<!-- Table -->
-			<table id='fetchTable' class='display dataTable'>
+			<table id='fetchTables' class='display dataTable'>
 				<thead>
 					<tr>
 						<th>Name</th>
@@ -76,33 +47,52 @@ while ($row = mysqli_fetch_assoc($result)) {
 					</tr>
 				</thead>
 				<tbody>
-					<?php foreach ($data as $row): ?>
-						<tr>
-							<td><?php echo htmlspecialchars($row['name']); ?></td>
-							<td><?php echo htmlspecialchars($row['email']); ?></td>
-							<td><?php echo htmlspecialchars($row['mo_number']); ?></td>
-							<td><?php echo htmlspecialchars($row['wtp_no']); ?></td>
-							<td><?php echo htmlspecialchars($row['destination']); ?></td>
-						</tr>
-					<?php endforeach; ?>
+					<!-- Data will be populated by AJAX -->
 				</tbody>
 			</table>
 		</div>
 
-		<!-- Script -->
+		<!-- Script to initialize DataTable with AJAX -->
 		<script>
 			$(document).ready(function() {
-				// Initialize DataTable with static data (now loaded directly)
-				$('#fetchTable').DataTable({
+				// Initialize DataTable with AJAX to fetch data
+				$('#fetchTables').DataTable({
 					'processing': true,
 					'responsive': true,
-					'scrollY': 350,
+					'scrollY': 450,
 					'order': [],
-					'pagingType': 'full_numbers'
+					'pagingType': 'full_numbers',
+					'serverMethod': 'post',
+					'pageLength': 100, // Set the number of records per page to 100
+					'ajax': {
+						'url': 'load-data/contact-log-ajax.php', // The path to the PHP file for fetching data
+						'type': 'POST',
+						'dataSrc': function(json) {
+							return json.data; // Ensure the JSON returned is in the format { data: [...] }
+						},
+						'error': function(xhr, error, thrown) {
+							console.error('AJAX error: ' + error + ' - ' + thrown);
+						}
+					},
+					'columns': [{
+							'data': 'name'
+						},
+						{
+							'data': 'email'
+						},
+						{
+							'data': 'mo_number'
+						},
+						{
+							'data': 'wtp_no'
+						},
+						{
+							'data': 'destination'
+						}
+					]
 				});
 			});
 		</script>
-
 	</div>
 
 	<?php include_once("layouts/footer.php"); ?>

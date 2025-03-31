@@ -219,32 +219,35 @@
           <!-- Counter - Alerts -->
           <span id="notificationCount" class="badge badge-danger badge-counter">
             <?php
-            // Set the time zone to Asia/Kolkata
             date_default_timezone_set('Asia/Kolkata');
-            $timestamp = date('Y-m-d H:i:s'); // current timestamp in Asia/Kolkata timezone
-
+            $timestamp = date('Y-m-d H:i:s');
             $user = $_SESSION["user_name"];
             $total_notifications = 0;
 
             if ($_SESSION['user_role_id'] == 0 || $_SESSION['user_role_id'] == 2 || $_SESSION['user_role_id'] == 1) {
-              // Check if the user is a sales person or an admin
+              // Sales Person or Admin: Calculate notifications
               if ($_SESSION['user_role_id'] == 0) {
-                // Sales Person: Get the leads for today
+                // Salesperson: Get the leads for today
                 $query = mysqli_query($db, "SELECT * FROM lead WHERE sales_person = '$user' AND status_now = '1' AND DATE(date) = CURDATE()");
-                // Count the results for sales person
-                $total_notifications = mysqli_num_rows($query);
-              } else {
-                // Admin: Get the lead notes for today
-                $querynote = mysqli_query($db, "SELECT * FROM lead_notes WHERE DATE(create_date) = CURDATE()");
-                $querypotential = mysqli_query($db, "SELECT * FROM potential_notes WHERE DATE(create_date) = CURDATE()");
 
-                // Count the results for both queries
-                if ($querynote) {
-                  $total_notifications += mysqli_num_rows($querynote);
-                }
-                if ($querypotential) {
-                  $total_notifications += mysqli_num_rows($querypotential);
-                }
+
+                $total_notifications = mysqli_num_rows($query);
+
+                // Fetch lead notes and potential notes for the salesperson using note_id and join with lead and potential tables
+                $querynote = mysqli_query($db, "SELECT ln.* FROM lead_notes ln 
+                                                    JOIN lead l ON ln.note_id = l.id 
+                                                    WHERE l.sales_person = '$user' AND DATE(ln.create_date) = CURDATE() AND ln.is_checked = 0");
+                $querypotential = mysqli_query($db, "SELECT pn.* FROM potential_notes pn 
+                                                        JOIN potential p ON pn.note_id = p.id 
+                                                        WHERE p.sales_person = '$user' AND DATE(pn.create_date) = CURDATE() AND pn.is_checked = 0");
+
+                $total_notifications += mysqli_num_rows($querynote) + mysqli_num_rows($querypotential);
+              } else {
+                // Admin: Get notifications for lead notes and potential notes for today
+                $querynote = mysqli_query($db, "SELECT * FROM lead_notes WHERE DATE(create_date) = CURDATE() AND is_checked = 0");
+                $querypotential = mysqli_query($db, "SELECT * FROM potential_notes WHERE DATE(create_date) = CURDATE() AND is_checked = 0");
+
+                $total_notifications += mysqli_num_rows($querynote) + mysqli_num_rows($querypotential);
               }
             }
 
@@ -253,14 +256,13 @@
           </span>
         </a>
 
-        <!-- notification Alerts -->
+        <!-- Notification Alerts -->
         <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown" style="max-height: 300px; overflow-y: auto;">
-          <!-- Dropdown - Alerts -->
           <h6 class="dropdown-header">
             Alerts Center
           </h6>
 
-          <!-- notification alert fetch -->
+          <!-- Notification alert fetch -->
           <div id="notification">
             <?php
             $user = $_SESSION["user_name"];
@@ -279,7 +281,6 @@
                         <div class="icon-circle bg-primary">
                           <p class="first-chr">
                             <?php
-                            // Get the first character of the lead name
                             $string = $row['name'];
                             $GetfirstChar = mb_substr($string, 0, 1, "UTF-8");
                             echo $GetfirstChar;
@@ -302,42 +303,45 @@
                 } else {
                   echo '<div class="alert alert-warning">No Notification Found...</div>';
                 }
-              } else {
-                // Admin: Get the lead notes for today
-                // Admin: Fetch lead notes and potential notes for today
-                $querynote = mysqli_query($db, "SELECT * FROM lead_notes WHERE DATE(create_date) = CURDATE() ORDER BY note_id DESC");
-                $querypotential = mysqli_query($db, "SELECT * FROM potential_notes WHERE DATE(create_date) = CURDATE() ORDER BY note_id DESC");
+
+                // Fetch lead notes and potential notes for salesperson using JOINs
+                $querynote = mysqli_query($db, "SELECT ln.* FROM lead_notes ln 
+                                                    JOIN lead l ON ln.note_id = l.id 
+                                                    WHERE l.sales_person = '$user' AND DATE(ln.create_date) = CURDATE() AND ln.is_checked = 0 ORDER BY note_id DESC");
+                $querypotential = mysqli_query($db, "SELECT pn.* FROM potential_notes pn 
+                                                        JOIN potential p ON pn.note_id = p.id 
+                                                        WHERE p.sales_person = '$user' AND DATE(pn.create_date) = CURDATE() AND pn.is_checked = 0 ORDER BY note_id DESC");
 
                 // Combine both results
                 $combined_query = [];
                 if ($querynote) {
                   while ($row = mysqli_fetch_array($querynote)) {
-                    $row['type'] = 'lead'; // Add a type flag to distinguish lead notes
+                    $row['type'] = 'lead';
                     $combined_query[] = $row;
                   }
                 }
                 if ($querypotential) {
                   while ($row = mysqli_fetch_array($querypotential)) {
-                    $row['type'] = 'potential'; // Add a type flag to distinguish potential notes
+                    $row['type'] = 'potential';
                     $combined_query[] = $row;
                   }
                 }
 
-                // Show lead notes notifications
+                // Show lead notes and potential notes notifications
                 if (count($combined_query) > 0) {
-                  foreach ($combined_query as $row) { ?>
+                  foreach ($combined_query as $row) {
+                  ?>
                     <a class="dropdown-item d-flex align-items-center" href="<?php
                                                                               if ($row['type'] == "potential") {
-                                                                                echo "Potential-view.php?view_potential=" . $row['note_id']; // Link to potential notes
+                                                                                echo "Potential-view.php?view_potential=" . $row['note_id'];
                                                                               } else if ($row['type'] == "lead") {
-                                                                                echo "lead-view.php?lead=" . $row['note_id']; // Link to lead notes
+                                                                                echo "lead-view.php?lead=" . $row['note_id'];
                                                                               }
                                                                               ?>">
                       <div class="mr-3">
                         <div class="icon-circle bg-warning">
                           <p class="first-chr">
                             <?php
-                            // Get the first character of the note description
                             $string = isset($row['note']) ? $row['note'] : '';
                             $GetfirstChar = mb_substr($string, 0, 1, "UTF-8");
                             echo $GetfirstChar;
@@ -355,7 +359,65 @@
                         </div>
                       </div>
                     </a>
-            <?php }
+                  <?php
+                  }
+                } else {
+                  echo '<div class="alert alert-warning">No Notification Found...</div>';
+                }
+              } else {
+                // Admin: Fetch lead notes and potential notes for today
+                $querynote = mysqli_query($db, "SELECT * FROM lead_notes WHERE DATE(create_date) = CURDATE() AND is_checked = 0 ORDER BY note_id DESC");
+                $querypotential = mysqli_query($db, "SELECT * FROM potential_notes WHERE DATE(create_date) = CURDATE() AND is_checked = 0 ORDER BY note_id DESC");
+
+                // Combine both results
+                $combined_query = [];
+                if ($querynote) {
+                  while ($row = mysqli_fetch_array($querynote)) {
+                    $row['type'] = 'lead';
+                    $combined_query[] = $row;
+                  }
+                }
+                if ($querypotential) {
+                  while ($row = mysqli_fetch_array($querypotential)) {
+                    $row['type'] = 'potential';
+                    $combined_query[] = $row;
+                  }
+                }
+
+                // Show notifications
+                if (count($combined_query) > 0) {
+                  foreach ($combined_query as $row) {
+                  ?>
+                    <a class="dropdown-item d-flex align-items-center" href="<?php
+                                                                              if ($row['type'] == "potential") {
+                                                                                echo "Potential-view.php?view_potential=" . $row['note_id'];
+                                                                              } else if ($row['type'] == "lead") {
+                                                                                echo "lead-view.php?lead=" . $row['note_id'];
+                                                                              }
+                                                                              ?>">
+                      <div class="mr-3">
+                        <div class="icon-circle bg-warning">
+                          <p class="first-chr">
+                            <?php
+                            $string = isset($row['note']) ? $row['note'] : '';
+                            $GetfirstChar = mb_substr($string, 0, 1, "UTF-8");
+                            echo $GetfirstChar;
+                            ?>
+                          </p>
+                        </div>
+                      </div>
+                      <div>
+                        <span class="font-weight-bold"><?php echo isset($row['note']) ? $row['note'] : 'Potential Note'; ?></span>
+                        <div class="small text-gray-500">
+                          <?php
+                          $time = $row['create_date'];
+                          echo date('d-m-Y, g:i A', strtotime($time));
+                          ?>
+                        </div>
+                      </div>
+                    </a>
+            <?php
+                  }
                 } else {
                   echo '<div class="alert alert-warning">No Notification Found...</div>';
                 }

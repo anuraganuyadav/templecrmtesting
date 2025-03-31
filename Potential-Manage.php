@@ -60,7 +60,7 @@ if ($getStatus['status'] == 0) {
         text-align: center;
         text-decoration: none !important;
         cursor: pointer;
-        *cursor: hand;
+        cursor: hand;
         color: #fff !important;
         border: 1px solid transparent;
         border-radius: 2px;

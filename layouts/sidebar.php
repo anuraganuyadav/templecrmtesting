@@ -467,6 +467,15 @@ if ($_SESSION['user_role_id'] == 1) {
                 <i class="fas fa-fw fa-table"></i>
                 <span>Sales Lead</span></a>
             </li>
+
+
+            <!-- All  Activity -->
+            <li class="nav-item">
+              <a class="nav-link" href="contacts.php">
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>Contact</span></a>
+            </li>
+
             <!-- Nav Item - inbox -->
 
             <!-- Divider -->

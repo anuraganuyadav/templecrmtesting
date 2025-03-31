@@ -419,7 +419,7 @@ if ($getStatus['status'] == 0) {
               });
             });
 
-            // delete notes 
+            // delete notes dx
             $(document).on('click', '.deleteNote', function() {
               var id = $(this).attr("id");
               if (confirm("Are you sure you want to delete note?")) {
