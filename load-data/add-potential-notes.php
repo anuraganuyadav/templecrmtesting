@@ -10,7 +10,7 @@ if ($_SESSION['user_role_id'] == 0 || $_SESSION['user_role_id'] == 1 || $_SESSIO
 
 
   $id = $_SESSION['clid'];
-
+  $userID = $_SESSION['userID']; // User ID from session
   if (isset($_POST["note"]) && strlen($_POST["note"]) > 1) {
     $contentToSave = $_POST["note"];
     $id = $_POST["id"];
@@ -28,7 +28,10 @@ if ($_SESSION['user_role_id'] == 0 || $_SESSION['user_role_id'] == 1 || $_SESSIO
     //  (note, note_id, create_date) VALUES('$contentToSave', '$id', '$timestamp')")) {
     // }
     // Insert note with "by admin" text if added by admin
-    if (mysqli_query($conn, "INSERT INTO potential_notes (note, note_id, create_date) VALUES('$contentToSave $addedByAdmin', '$id', '$timestamp')")) {
+
+
+
+    if (mysqli_query($conn, "INSERT INTO potential_notes (note, note_id, create_date,lead_user_id) VALUES('$contentToSave $addedByAdmin', '$id', '$timestamp','$userID')")) {
     }
   }
 ?>
@@ -37,7 +40,9 @@ if ($_SESSION['user_role_id'] == 0 || $_SESSION['user_role_id'] == 1 || $_SESSIO
   <div class="table-responsive">
     <table id="noteResponse<?php echo $id; ?>" class="table-bordered table-danger" width="100%" cellspacing="0">
       <?php
-      $query_r = mysqli_query($db, "SELECT id, note_id, note, create_date FROM potential_notes WHERE note_id = $id ORDER BY id DESC");
+      // $query_r = mysqli_query($db, "SELECT id, note_id, note, create_date FROM potential_notes WHERE note_id = $id ORDER BY id DESC");
+
+      $query_r = mysqli_query($db, "SELECT potential_notes.id, potential_notes.note_id, potential_notes.note, potential_notes.create_date, potential_notes.lead_user_id, users.user_name FROM potential_notes LEFT JOIN users ON potential_notes.lead_user_id = users.userID WHERE potential_notes.note_id = $id ORDER BY potential_notes.id DESC");
       while ($row = mysqli_fetch_array($query_r)) {
       ?>
         <tr>
@@ -49,6 +54,7 @@ if ($_SESSION['user_role_id'] == 0 || $_SESSION['user_role_id'] == 1 || $_SESSIO
                                       //type1  echo  date('g:i A, l - d M Y', strtotime($time));
                                       //type2 echo  date("m-d-Y", strtotime($time)); 
                                       ?></td>
+          <td class="note-user pl-2"><?php echo $row['user_name']; ?></td>
           <td class="note-del pl-2">
             <!--  delete    -->
             <button type="button" class="btn btn-danger btn-circle btn-sm btn-delete deleteNote" id="<?php echo $row["id"] ?>"><i class="fas fa-trash"></i></button>
