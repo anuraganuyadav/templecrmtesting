@@ -22,12 +22,18 @@ if ($_SESSION['user_role_id'] == 0 && $_SESSION['user_role_id'] == 1 && $_SESSIO
 
 
 require_once 'inc/config.php';
-if (isset($_GET['lead']) && !empty($_GET['lead'])) {
+if (isset($_GET['lead']) && !empty($_GET['lead']) ) {
   $uid = $_GET['lead'];
+  $nf_id = $_GET['nf_id'] ?? '';
   $stmt_edit = $DB_con->prepare('SELECT * FROM lead WHERE id =:uid');
   $stmt_edit->execute(array(':uid' => $uid));
   $edit_row = $stmt_edit->fetch(PDO::FETCH_ASSOC);
   extract($edit_row);
+  if(!empty($nf_id)){
+    $update_lead_notifications = $DB_con->prepare("UPDATE lead_notes SET is_checked = 1 WHERE note_id = :noteId AND id =:nfId");
+    $update_lead_notifications->execute(array(':noteId' => $uid, ':nfId' => $nf_id));
+  }
+
 } else {
   header("Location: index.php");
 }
